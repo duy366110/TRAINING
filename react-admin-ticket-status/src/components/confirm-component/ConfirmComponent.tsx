@@ -24,7 +24,7 @@ const ConfirmComponent = (props: any) => {
 
   return (
     <Dialog open={confirm.isOpen || false} onClose={closeHandler}>
-      <DialogTitle>Add New Comment</DialogTitle>
+      <DialogTitle>{confirm.title}</DialogTitle>
       <DialogContent>
         <DialogContentText>{confirm.message || ""}</DialogContentText>
         {props.children}
