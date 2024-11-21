@@ -9,150 +9,26 @@ import {
   FunctionField,
   useDelete,
   Filter,
-  TextInput,
-  useNotify
+  useNotify,
+  SearchInput
 } from "react-admin";
-import { useDispatch, useSelector } from "react-redux";
-import { RootDispatch, RootState } from "@/stores";
-import { open, clear } from "@/stores/slices/sliceConfirm";
-import ListComponent from "@/components/list-component/ListComponent";
 import TabComponent from "@/components/tab-component/TabComponent";
-import ActionsComponent from "@/components/actions-component/ActionsComponent";
-import DialogComponent from "@/components/dialog-component/DialogComponent";
-import UtilFormCreate from "./utils/UtilFormCreate";
-import UtilFormEdit from "./utils/UtilFormEdit";
-import Checkbox from "@mui/material/Checkbox";
 
-const ProductFilter = (props) => (
-  <Filter {...props}>
-    <TextInput label="Search" source="q" alwaysOn />
-  </Filter>
-);
+import UtilList from "./utils/UtilList";
 
 const StatusList = (props: any) => {
-  const confirm: any = useSelector<RootState>((state) => state.confirm);
-  const dispath = useDispatch<RootDispatch>();
-  const notify = useNotify();
-
   const [value, setValue] = useState(0);
-  const [selectedIds, setSelectedIds] = useState<number>(-1);
-  const [deleteOne, { isLoading }] = useDelete();
 
   const handleChangeTab = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
-  const [dialogCreate, setDialogCreate] = useState(false);
-  const [dialogEdit, setDialogEdit] = useState(false);
-
-  const openDialogCreate = () => {
-    setDialogCreate(true);
-  };
-
-  const closeDialogCreate = () => {
-    setDialogCreate(false);
-  };
-
-  const openDialogEdit = () => {
-    if (selectedIds >= 0) {
-      setDialogEdit(true);
-    }
-  };
-
-  const closeDialogEdit = () => {
-    setDialogEdit(false);
-  };
-
-  const handleCheckboxChange = (id: number) => {
-    setSelectedIds(id);
-  };
-
-  const handleDelete = () => {
-    if(selectedIds < 0) {
-      dispath(open({ message: "Please select a status.", isSave: false }));
-      return;
-    }
-    dispath(open({ message: "Are you sure you want to delete?", isSave: true }));
-  };
-
-  useEffect(() => {
-    if (confirm.value) {
-      deleteOne(
-        "status",
-        { id: selectedIds },
-        {
-          onSuccess: () => {
-            dispath(clear());
-            notify('Delete success!', { type: 'success' });
-          },
-          onError: (error) => {
-            notify('Delete unsuccess!', { type: 'error' });
-          },
-        },
-      );
-     
-    }
-  }, [confirm.value]);
-
   return (
     <TabComponent value={value} change={handleChangeTab}>
       <>
-        {value === 0 && (
-          <div>
-            <ListComponent
-              resource="status"
-              isActions={true}
-              filters={<ProductFilter />}
-              actions={
-                <ActionsComponent
-                  types="status"
-                  onOpenCreate={openDialogCreate}
-                  onOpenEdit={openDialogEdit}
-                  onDelete={handleDelete}
-                />
-              }
-            >
-              <Datagrid
-                bulkActionButtons={false}
-                rowClick={(id, basePath, record) => {
-                  return false;
-                }}
-              >
-                <FunctionField
-                  label="Select"
-                  render={(record: any) => (
-                    <Checkbox
-                      checked={selectedIds === record?.id}
-                      onChange={() => handleCheckboxChange(record.id)}
-                    />
-                  )}
-                />
-
-                <TextField source="id" label="ID" />
-                <TextField source="title" label="Tiêu đề" />
-                <TextField source="body" label="Nội dung" />
-                <ReferenceField
-                  source="userId"
-                  reference="users"
-                  label="Tác giả"
-                >
-                  <TextField source="name" />
-                </ReferenceField>
-              </Datagrid>
-            </ListComponent>
-
-            <DialogComponent open={dialogCreate} onClose={closeDialogCreate}>
-              <UtilFormCreate closeDialog={closeDialogCreate} />
-            </DialogComponent>
-
-            {selectedIds >= 0 && (
-              <DialogComponent open={dialogEdit} onClose={closeDialogEdit}>
-                <UtilFormEdit id={selectedIds} closeDialog={closeDialogEdit} />
-              </DialogComponent>
-            )}
-          </div>
-        )}
-        {value === 1 && (
+        {value === 0 && (<UtilList model="status" />)}
+        {value === 1 && (<UtilList model="comments" />)}
+        {/* {value === 1 && (
           <div>
             <List resource="comments" perPage={10}>
               <DatagridConfigurable>
@@ -161,7 +37,7 @@ const StatusList = (props: any) => {
               </DatagridConfigurable>
             </List>
           </div>
-        )}
+        )} */}
       </>
     </TabComponent>
   );

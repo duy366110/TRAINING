@@ -1,12 +1,23 @@
-import {useCreate, Create, SimpleForm, TextInput, required,} from "react-admin";
+import {
+  useCreate,
+  Create,
+  SimpleForm,
+  TextInput,
+  required,
+} from "react-admin";
 
-const UtilFormCreate = (props: any) => {
-    const [create] = useCreate("status");
+interface UtilFormCreateProps {
+  model: string;
+  closeDialog: () => void;
+}
+
+const UtilFormCreate = (props: UtilFormCreateProps) => {
+  const [create] = useCreate(props.model);
 
   const handleSubmit = async (data: any) => {
     try {
       await create(
-        "status",
+        props.model,
         { data },
         {
           onSuccess: () => {
@@ -23,22 +34,24 @@ const UtilFormCreate = (props: any) => {
   };
 
   return (
-    <Create>
-      <SimpleForm
-        onSubmit={handleSubmit}
-      >
-        <TextInput
-          label="Title"
-          source="title"
-          validate={required()}
-        />
-        <TextInput
-          label="Body"
-          source="body"
-          validate={required()}
-        />
-      </SimpleForm>
-    </Create>
+    <>
+      {props.model === "status" && (
+        <Create>
+          <SimpleForm onSubmit={handleSubmit}>
+            <TextInput label="Title" source="title" validate={required()} />
+            <TextInput label="Body" source="body" validate={required()} />
+          </SimpleForm>
+        </Create>
+      )}
+
+      {props.model === "comments" && (
+        <Create>
+          <SimpleForm onSubmit={handleSubmit}>
+            <TextInput label="Content" source="content" validate={required()} />
+          </SimpleForm>
+        </Create>
+      )}
+    </>
   );
 };
 

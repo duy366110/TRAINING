@@ -4,16 +4,17 @@ import { useUpdate, SimpleForm, TextInput, required, Edit } from "react-admin";
 interface UtilFormEdit {
   children?: ReactNode;
   id: number;
+  model: string;
   closeDialog: () => void;
 }
 
 const UtilFormEdit = (props: UtilFormEdit) => {
-  const [update] = useUpdate("status");
+  const [update] = useUpdate(props.model);
 
   const handleSubmit = async (data: any) => {
     try {
       await update(
-        "status",
+        props.model,
         { id: props.id, data },
         {
           onSuccess: () => {
@@ -30,12 +31,24 @@ const UtilFormEdit = (props: UtilFormEdit) => {
   };
 
   return (
-    <Edit id={props.id} resource="status" mutationMode="pessimistic">
-      <SimpleForm onSubmit={handleSubmit}>
-        <TextInput label="Title" source="title" validate={required()} />
-        <TextInput label="Content" source="content" validate={required()} />
-      </SimpleForm>
-    </Edit>
+    <>
+      {props.model === "status" && (
+        <Edit id={props.id} resource={props.model} mutationMode="pessimistic">
+          <SimpleForm onSubmit={handleSubmit}>
+            <TextInput label="Title" source="title" validate={required()} />
+            <TextInput label="Content" source="content" validate={required()} />
+          </SimpleForm>
+        </Edit>
+      )}
+
+      {props.model === "comments" && (
+        <Edit id={props.id} resource={props.model} mutationMode="pessimistic">
+          <SimpleForm onSubmit={handleSubmit}>
+            <TextInput label="Content" source="content" validate={required()} />
+          </SimpleForm>
+        </Edit>
+      )}
+    </>
   );
 };
 

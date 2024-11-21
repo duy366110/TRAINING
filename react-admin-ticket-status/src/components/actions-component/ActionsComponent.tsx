@@ -34,6 +34,30 @@ const ActionsComponent = (props: ActionsComponentProps) => {
           </Button>
         </TopToolbar>
       )}
+
+      {props.types === "comments" && (
+        <TopToolbar>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={props.onOpenCreate}
+          >
+            + Create
+          </Button>
+
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={props.onOpenEdit}
+          >
+            Edit
+          </Button>
+
+          <Button onClick={props.onDelete} variant="contained" color="error">
+            Delete
+          </Button>
+        </TopToolbar>
+      )}
     </>
   );
 };
