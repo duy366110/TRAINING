@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   List,
   DatagridConfigurable,
@@ -7,8 +7,14 @@ import {
   ReferenceField,
   Datagrid,
   FunctionField,
-  useDelete
+  useDelete,
+  Filter,
+  TextInput,
+  useNotify
 } from "react-admin";
+import { useDispatch, useSelector } from "react-redux";
+import { RootDispatch, RootState } from "@/stores";
+import { open, clear } from "@/stores/slices/sliceConfirm";
 import ListComponent from "@/components/list-component/ListComponent";
 import TabComponent from "@/components/tab-component/TabComponent";
 import ActionsComponent from "@/components/actions-component/ActionsComponent";
@@ -17,7 +23,17 @@ import UtilFormCreate from "./utils/UtilFormCreate";
 import UtilFormEdit from "./utils/UtilFormEdit";
 import Checkbox from "@mui/material/Checkbox";
 
+const ProductFilter = (props) => (
+  <Filter {...props}>
+    <TextInput label="Search" source="q" alwaysOn />
+  </Filter>
+);
+
 const StatusList = (props: any) => {
+  const confirm: any = useSelector<RootState>((state) => state.confirm);
+  const dispath = useDispatch<RootDispatch>();
+  const notify = useNotify();
+
   const [value, setValue] = useState(0);
   const [selectedIds, setSelectedIds] = useState<number>(-1);
   const [deleteOne, { isLoading }] = useDelete();
@@ -38,7 +54,7 @@ const StatusList = (props: any) => {
   };
 
   const openDialogEdit = () => {
-    if(selectedIds >= 0) {
+    if (selectedIds >= 0) {
       setDialogEdit(true);
     }
   };
@@ -52,22 +68,31 @@ const StatusList = (props: any) => {
   };
 
   const handleDelete = () => {
-    deleteOne(
-      "status",
-      { id: selectedIds },
-      {
-        onSuccess: () => {
-          // notify('Xóa thành công!', 'info');
-          // setOpen(false); // Đóng modal sau khi xóa thành công
-          // redirect('/' + resource); // Điều hướng về trang danh sách
-        },
-        onError: (error) => {
-          // notify(`Có lỗi khi xóa: ${error.message}`, 'warning');
-          // setOpen(false); // Đóng modal nếu có lỗi
-        },
-      }
-    );
+    if(selectedIds < 0) {
+      dispath(open({ message: "Please select a status.", isSave: false }));
+      return;
+    }
+    dispath(open({ message: "Are you sure you want to delete?", isSave: true }));
   };
+
+  useEffect(() => {
+    if (confirm.value) {
+      deleteOne(
+        "status",
+        { id: selectedIds },
+        {
+          onSuccess: () => {
+            dispath(clear());
+            notify('Delete success!', { type: 'success' });
+          },
+          onError: (error) => {
+            notify('Delete unsuccess!', { type: 'error' });
+          },
+        },
+      );
+     
+    }
+  }, [confirm.value]);
 
   return (
     <TabComponent value={value} change={handleChangeTab}>
@@ -77,6 +102,7 @@ const StatusList = (props: any) => {
             <ListComponent
               resource="status"
               isActions={true}
+              filters={<ProductFilter />}
               actions={
                 <ActionsComponent
                   types="status"
