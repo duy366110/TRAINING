@@ -7,6 +7,7 @@ import {
   ReferenceField,
   Datagrid,
   FunctionField,
+  useDelete
 } from "react-admin";
 import ListComponent from "@/components/list-component/ListComponent";
 import TabComponent from "@/components/tab-component/TabComponent";
@@ -19,6 +20,7 @@ import Checkbox from "@mui/material/Checkbox";
 const StatusList = (props: any) => {
   const [value, setValue] = useState(0);
   const [selectedIds, setSelectedIds] = useState<number>(-1);
+  const [deleteOne, { isLoading }] = useDelete();
 
   const handleChangeTab = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -49,6 +51,24 @@ const StatusList = (props: any) => {
     setSelectedIds(id);
   };
 
+  const handleDelete = () => {
+    deleteOne(
+      "status",
+      { id: selectedIds },
+      {
+        onSuccess: () => {
+          // notify('Xóa thành công!', 'info');
+          // setOpen(false); // Đóng modal sau khi xóa thành công
+          // redirect('/' + resource); // Điều hướng về trang danh sách
+        },
+        onError: (error) => {
+          // notify(`Có lỗi khi xóa: ${error.message}`, 'warning');
+          // setOpen(false); // Đóng modal nếu có lỗi
+        },
+      }
+    );
+  };
+
   return (
     <TabComponent value={value} change={handleChangeTab}>
       <>
@@ -62,13 +82,14 @@ const StatusList = (props: any) => {
                   types="status"
                   onOpenCreate={openDialogCreate}
                   onOpenEdit={openDialogEdit}
+                  onDelete={handleDelete}
                 />
               }
             >
               <Datagrid
                 bulkActionButtons={false}
                 rowClick={(id, basePath, record) => {
-                  return false; // Hoặc thực hiện logic tuỳ chỉnh
+                  return false;
                 }}
               >
                 <FunctionField
