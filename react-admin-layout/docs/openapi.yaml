@@ -1,0 +1,62 @@
+openapi: 3.0.0
+info:
+  title: API Example
+  description: Đây là API giả lập để phát triển frontend khi backend chưa hoàn thiện.
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:4010/api'  # URL của mock server, có thể thay đổi tùy theo môi trường của bạn
+paths:
+  /users:
+    get:
+      summary: Lấy danh sách người dùng
+      responses:
+        '200':
+          description: Thành công
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+    post:
+      summary: Thêm người dùng mới
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '201':
+          description: Người dùng đã được tạo thành công
+  /users/{id}:
+    get:
+      summary: Lấy thông tin người dùng theo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Thành công
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+        '404':
+          description: Người dùng không tồn tại
