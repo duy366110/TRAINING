@@ -1,3 +1,4 @@
+import { TopToolbar } from "react-admin";
 import {
     Button,
   } from "@mui/material";
@@ -5,13 +6,14 @@ import {
 interface ActionsComponentProps {
   types?: string;
   onOpenCreate?: () => void;
+  onOpenEdit?: () => void;
 }
 
 const ActionsComponent = (props: ActionsComponentProps) => {
   return (
     <>
       {props.types === "status" && (
-        <div>
+        <TopToolbar>
           <Button
             variant="contained"
             color="primary"
@@ -19,7 +21,22 @@ const ActionsComponent = (props: ActionsComponentProps) => {
           >
             + Create
           </Button>
-        </div>
+
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={props.onOpenEdit}
+            >
+              Edit
+            </Button>
+
+            <Button
+            variant="contained"
+            color="error"
+            >
+              Delete
+            </Button>
+        </TopToolbar>
       )}
     </>
   );
