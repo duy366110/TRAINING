@@ -30,7 +30,7 @@ const UtilFormEdit = (props: UtilFormEdit) => {
   };
 
   return (
-    <Edit id={props.id} resource="status">
+    <Edit id={props.id} resource="status" mutationMode="pessimistic">
       <SimpleForm onSubmit={handleSubmit}>
         <TextInput label="Title" source="title" validate={required()} />
         <TextInput label="Content" source="content" validate={required()} />
