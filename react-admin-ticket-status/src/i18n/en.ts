@@ -77,6 +77,9 @@ const customEnglishMessages: TranslationMessages = {
             default: "Default",
             priority: "Priority",
         },
+        notify: {
+            notPermission:"Not permissions!",
+        }
     },
     resources: {
         default: {

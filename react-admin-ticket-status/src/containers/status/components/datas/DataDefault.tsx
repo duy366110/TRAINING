@@ -5,18 +5,18 @@ import {
   useTranslate,
   useListContext,
 } from "react-admin";
-import FieldFunctionComponent from "@/components/fields-component/field-function-component/FieldFunctionComponent";
 import Checkbox from "@mui/material/Checkbox";
 import { Typography } from "@mui/material";
+import FieldFunctionComponent from "@/components/fields-component/field-function-component/FieldFunctionComponent";
 
-interface DataStatusProps {
+interface DataDefaultProps {
   selectedIds: number;
   handleCheckboxChange: (id: number) => any;
 }
 
-const DataStatus = (props: DataStatusProps) => {
-  const translate = useTranslate();
+const DataDefault = (props: DataDefaultProps) => {
   const { data, filterValues }: any = useListContext();
+  const translate = useTranslate();
 
   const renderCustomField = (record: any, filed: string) => {
     if (["Lowest", "Red"].includes(record[filed])) {
@@ -128,4 +128,4 @@ const DataStatus = (props: DataStatusProps) => {
   );
 };
 
-export default DataStatus;
+export default DataDefault;

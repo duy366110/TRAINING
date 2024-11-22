@@ -8,7 +8,9 @@ import {
   SaveButton,
   DeleteButton,
   useDelete,
-  useNotify
+  useNotify,
+  useGetIdentity,
+  useTranslate
 } from "react-admin";
 
 interface UtilFormEdit {
@@ -19,44 +21,54 @@ interface UtilFormEdit {
 }
 
 const UtilFormEdit = (props: UtilFormEdit) => {
+  const { identity }: any = useGetIdentity();
   const [update] = useUpdate(props.model);
-  const [deleteOne, { isLoading }] = useDelete();
+  const [deleteOne] = useDelete();
   const notify = useNotify();
+  const translate = useTranslate();
 
   const handleSubmit = async (data: any) => {
-    try {
-      await update(
-        props.model,
-        { id: props.id, data },
-        {
-          onSuccess: () => {
-            props.closeDialog();
+    if(["admin", "edit"].includes(identity.role) && identity.permissions?.includes('edit')) {
+      try {
+        await update(
+          props.model,
+          { id: props.id, data },
+          {
+            onSuccess: () => {
+              props.closeDialog();
+            },
+            onFailure: (error: any) => {
+              console.log(error.message);
+            },
           },
-          onFailure: (error: any) => {
-            console.log(error.message);
-          },
-        },
-      );
-    } catch (e) {
-      console.log("Error while saving data.");
+        );
+      } catch (e) {
+        console.log("Error while saving data.");
+      }
+    } else {
+      notify(translate("commons.notify.notPermission"), { type: "error" });
     }
   };
 
   const handleDelete = async() => {
-    if(props.id) {
-      deleteOne(
-        props.model,
-        { id: props.id },
-        {
-          onSuccess: () => {
-            notify("Delete success!", { type: "success" });
-            props.closeDialog();
+    if(identity.role === "admin" && identity.permissions?.includes('delete')) {
+      if(props.id) {
+        deleteOne(
+          props.model,
+          { id: props.id },
+          {
+            onSuccess: () => {
+              notify("Delete success!", { type: "success" });
+              props.closeDialog();
+            },
+            onError: (error) => {
+              notify("Delete unsuccess!", { type: "error" });
+            },
           },
-          onError: (error) => {
-            notify("Delete unsuccess!", { type: "error" });
-          },
-        },
-      );
+        );
+      }
+    } else {
+      notify(translate("commons.notify.notPermission"), { type: "error" });
     }
   }
 

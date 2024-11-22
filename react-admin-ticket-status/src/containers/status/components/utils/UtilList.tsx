@@ -4,7 +4,8 @@ import {
   Filter,
   useNotify,
   SearchInput,
-  useTranslate
+  useTranslate,
+  useGetIdentity,
 } from "react-admin";
 import { useDispatch, useSelector } from "react-redux";
 import { RootDispatch, RootState } from "@/stores";
@@ -16,37 +17,33 @@ import UtilFormCreate from "./UtilFormCreate";
 import UtilFormEdit from "./UtilFormEdit";
 
 import DataStatus from "../datas/DataStatus";
-import DataComments from "../datas/DataComments";
+import DataDefault from "../datas/DataDefault";
 
 const ProductFilter = (props: any) => {
   const translate = useTranslate();
 
   return (
     <Filter {...props}>
-      <SearchInput source="q" alwaysOn placeholder={translate("commons.filter.search")} />
+      <SearchInput
+        source="value"
+        alwaysOn
+        placeholder={translate("commons.filter.search")} />
     </Filter>
   );
 }
 
 const UtilList = (props: any) => {
-  const confirm: any = useSelector<RootState>((state) => state.confirm);
+  const { identity }: any = useGetIdentity();
   const translate = useTranslate();
-  const dispath = useDispatch<RootDispatch>();
+  const [deleteOne] = useDelete();
   const notify = useNotify();
 
-  const [selectedIds, setSelectedIds] = useState<number>(-1);
-  const [deleteOne, { isLoading }] = useDelete();
+  const confirm: any = useSelector<RootState>((state) => state.confirm);
+  const dispath = useDispatch<RootDispatch>();
 
+  const [selectedIds, setSelectedIds] = useState<number>(-1);
   const [dialogCreate, setDialogCreate] = useState(false);
   const [dialogEdit, setDialogEdit] = useState(false);
-
-  const openDialogCreate = () => {
-    setDialogCreate(true);
-  };
-
-  const closeDialogCreate = () => {
-    setDialogCreate(false);
-  };
 
   const openDialogEdit = () => {
     if (selectedIds < 0) {
@@ -73,21 +70,25 @@ const UtilList = (props: any) => {
   };
 
   const handleDelete = () => {
-    if (selectedIds < 0) {
-      dispath(open({
-        title: translate("commons.button.delete"),
-        message: translate("commons.confirm.message"),
-        isSave: false
-      }));
-      return;
+    if(identity.role === "admin" && identity.permissions?.includes('delete')) {
+      if (selectedIds < 0) {
+        dispath(open({
+          title: translate("commons.button.delete"),
+          message: translate("commons.confirm.message"),
+          isSave: false
+        }));
+        return;
+      }
+      dispath(
+        open({
+          title: translate("commons.button.delete"),
+          message: translate("commons.confirm.message"),
+          isSave: true
+        }),
+      );
+    } else {
+      notify(translate("commons.notify.notPermission"), { type: "error" });
     }
-    dispath(
-      open({
-        title: translate("commons.button.delete"),
-        message: translate("commons.confirm.message"),
-        isSave: true
-      }),
-    );
   };
 
   useEffect(() => {
@@ -115,15 +116,14 @@ const UtilList = (props: any) => {
 
   return (
     <>
-      
         <ListComponent
           resource={props.model}
           isActions={true}
-          filters={<ProductFilter />}
+          filters={<ProductFilter props={props} />}
           actions={
             <ActionsComponent
               types={props.model}
-              onOpenCreate={openDialogCreate}
+              onOpenCreate={() => setDialogCreate(true)}
               onOpenEdit={openDialogEdit}
               onDelete={handleDelete}
             />
@@ -137,7 +137,7 @@ const UtilList = (props: any) => {
           )}
 
           {props.model === "defaults" && (
-            <DataComments
+            <DataDefault
               selectedIds={selectedIds}
               handleCheckboxChange={handleCheckboxChange}
             />
@@ -149,9 +149,9 @@ const UtilList = (props: any) => {
         titleContent="commons.dialog.create"
         subTitle="commons.dialog.subTitleCreate"
         open={dialogCreate}
-        onClose={closeDialogCreate}
+        onClose={() => setDialogCreate(false)}
       >
-        <UtilFormCreate model={props.model} closeDialog={closeDialogCreate} />
+        <UtilFormCreate model={props.model} closeDialog={() => setDialogCreate(false)} />
       </DialogComponent>
 
       {selectedIds >= 0 && (
