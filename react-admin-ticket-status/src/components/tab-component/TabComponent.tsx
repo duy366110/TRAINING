@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { Card, CardContent } from '@mui/material';
-import { Tab, Tabs } from '@mui/material';
+import { useTranslate } from "react-admin";
+import { Card, CardContent, Tab, Tabs } from '@mui/material';
 
 interface TabComponentProps {
   children?: ReactNode;
@@ -9,12 +9,17 @@ interface TabComponentProps {
 }
 
 const TabComponent = (props: TabComponentProps) => {
+
+  const translate = useTranslate();
+
   return (
-    <Card>
+    <Card
+      style={{marginTop: "25px"}}
+    >
       <CardContent>
         <Tabs value={props.value} onChange={props.change}>
-          <Tab label={"Priority"} />
-          <Tab label={"Default"} />
+          <Tab label={translate("commons.tabs.priority")} />
+          <Tab label={translate("commons.tabs.default")} />
         </Tabs>
         {props.children}
       </CardContent>

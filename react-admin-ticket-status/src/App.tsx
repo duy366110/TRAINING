@@ -1,21 +1,36 @@
-import { Admin, Resource } from "react-admin";
+import { Admin, Resource, useStore } from "react-admin";
 import { Provider } from "react-redux";
-import { Layout } from "./Layout";
-import { dataProvider } from "./dataProvider";
-import { authProvider } from "./authProvider";
+import CustomLayout from "@/layouts/LayoutCustom";
+import { themes, ThemeName } from "@/themes/themes";
+import { dataProvider } from "@/providers/dataProvider";
+import dataProviderFactory from "@/providers";
+import { authProvider } from "@/providers/authProvider";
+import { i18nProvider } from "@/providers/i18nProvider";
 import store from "@/stores/index";
 import status from "@/containers/status/index";
 import Footer from "./containers/Footer";
 
-const App = () => (
-  <Admin
-    layout={Layout}
-    dataProvider={dataProvider}
-    authProvider={authProvider}
-  >
-    <Resource name="status" {...status} />
-  </Admin>
-);
+const App = () => {
+  const [themeName] = useStore<ThemeName>("themeName", "soft");
+  const lightTheme = themes.find((theme) => theme.name === themeName)?.light;
+  const darkTheme = themes.find((theme) => theme.name === themeName)?.dark;
+
+  return (
+    <Admin
+      layout={CustomLayout}
+      // dataProvider={dataProvider}
+      dataProvider={dataProviderFactory(
+        "",
+      )}
+      authProvider={authProvider}
+      i18nProvider={i18nProvider}
+      lightTheme={lightTheme}
+      darkTheme={darkTheme}
+    >
+      <Resource name="status" {...status} />
+    </Admin>
+  );
+};
 
 const AppWrapper = () => (
   <Provider store={store}>
