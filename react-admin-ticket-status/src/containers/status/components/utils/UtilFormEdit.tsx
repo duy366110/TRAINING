@@ -28,7 +28,7 @@ const UtilFormEdit = (props: UtilFormEdit) => {
   const translate = useTranslate();
 
   const handleSubmit = async (data: any) => {
-    if( ["admin", "edit"].includes(identity.role) && identity.permissions?.includes('edit')) {
+    if(["admin", "edit"].includes(identity.role) && identity.permissions?.includes('edit')) {
       try {
         await update(
           props.model,

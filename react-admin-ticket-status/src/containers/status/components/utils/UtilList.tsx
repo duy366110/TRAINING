@@ -4,7 +4,8 @@ import {
   Filter,
   useNotify,
   SearchInput,
-  useTranslate
+  useTranslate,
+  useGetIdentity
 } from "react-admin";
 import { useDispatch, useSelector } from "react-redux";
 import { RootDispatch, RootState } from "@/stores";
@@ -23,12 +24,13 @@ const ProductFilter = (props: any) => {
 
   return (
     <Filter {...props}>
-      <SearchInput source="q" alwaysOn placeholder={translate("commons.filter.search")} />
+      <SearchInput source="value" alwaysOn placeholder={translate("commons.filter.search")} />
     </Filter>
   );
 }
 
 const UtilList = (props: any) => {
+  const { identity, isLoading: isLoadingIdentity, error: errorIdentity }: any = useGetIdentity();
   const confirm: any = useSelector<RootState>((state) => state.confirm);
   const translate = useTranslate();
   const dispath = useDispatch<RootDispatch>();
@@ -73,21 +75,25 @@ const UtilList = (props: any) => {
   };
 
   const handleDelete = () => {
-    if (selectedIds < 0) {
-      dispath(open({
-        title: translate("commons.button.delete"),
-        message: translate("commons.confirm.message"),
-        isSave: false
-      }));
-      return;
+    if(identity.role === "admin" && identity.permissions?.includes('delete')) {
+      if (selectedIds < 0) {
+        dispath(open({
+          title: translate("commons.button.delete"),
+          message: translate("commons.confirm.message"),
+          isSave: false
+        }));
+        return;
+      }
+      dispath(
+        open({
+          title: translate("commons.button.delete"),
+          message: translate("commons.confirm.message"),
+          isSave: true
+        }),
+      );
+    } else {
+      notify(translate("commons.notify.notPermission"), { type: "error" });
     }
-    dispath(
-      open({
-        title: translate("commons.button.delete"),
-        message: translate("commons.confirm.message"),
-        isSave: true
-      }),
-    );
   };
 
   useEffect(() => {
@@ -119,7 +125,7 @@ const UtilList = (props: any) => {
         <ListComponent
           resource={props.model}
           isActions={true}
-          filters={<ProductFilter />}
+          filters={<ProductFilter props={props} />}
           actions={
             <ActionsComponent
               types={props.model}

@@ -33,7 +33,11 @@ const DataDefault = (props: DataDefaultProps) => {
         render={(record: any) => (
           <Checkbox
             checked={props.selectedIds === record?.id}
-            onChange={() => props.handleCheckboxChange(record.id)}
+            onChange={() => {
+              if(!record?.default) {
+                props.handleCheckboxChange(record.id)
+              }
+            }}
           />
         )}
       />
