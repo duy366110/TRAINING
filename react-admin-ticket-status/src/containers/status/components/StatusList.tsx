@@ -14,8 +14,8 @@ const StatusList = (props: any) => {
   return (
     <TabComponent value={value} change={handleChangeTab}>
       <>
-        {value === 0 && (<UtilList model="status" />)}
-        {value === 1 && (<UtilList model="comments" />)}
+        {value === 0 && (<UtilList model="priorities" />)}
+        {value === 1 && (<UtilList model="defaults" />)}
       </>
     </TabComponent>
   );

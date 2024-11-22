@@ -15,9 +15,6 @@ const UtilFormCreate = (props: UtilFormCreateProps) => {
   const [create] = useCreate(props.model);
 
   const handleSubmit = async (data: any) => {
-    console.log(props.model);
-    console.log(data);
-
     try {
       await create(
         props.model,
@@ -38,23 +35,50 @@ const UtilFormCreate = (props: UtilFormCreateProps) => {
 
   return (
     <>
-      {props.model === "status" && (
+      {props.model === "priorities" && (
         <Create>
           <SimpleForm onSubmit={handleSubmit}>
-            {/* <TextInput hidden={true} label="Value" source="id" defaultValue={110} /> */}
             <TextInput label="Value" source="value" validate={required()} />
             <TextInput label="Display" source="display" validate={required()} />
-            <TextInput label="Description" source="description" validate={required()} />
-            <TextInput label="Foreground" source="foreground" validate={required()} />
-            <TextInput label="Background" source="background" validate={required()} />
+            <TextInput
+              label="Description"
+              source="description"
+              validate={required()}
+            />
+            <TextInput
+              label="Foreground"
+              source="foreground"
+              validate={required()}
+            />
+            <TextInput
+              label="Background"
+              source="background"
+              validate={required()}
+            />
           </SimpleForm>
         </Create>
       )}
 
-      {props.model === "comments" && (
+      {props.model === "defaults" && (
         <Create>
           <SimpleForm onSubmit={handleSubmit}>
-            <TextInput label="Content" source="content" validate={required()} />
+            <TextInput label="Value" source="value" validate={required()} />
+            <TextInput label="Display" source="display" validate={required()} />
+            <TextInput
+              label="Description"
+              source="description"
+              validate={required()}
+            />
+            <TextInput
+              label="Foreground"
+              source="foreground"
+              validate={required()}
+            />
+            <TextInput
+              label="Background"
+              source="background"
+              validate={required()}
+            />
           </SimpleForm>
         </Create>
       )}

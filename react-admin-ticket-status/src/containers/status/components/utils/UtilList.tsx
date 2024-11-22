@@ -116,14 +116,14 @@ const UtilList = (props: any) => {
             />
           }
         >
-          {props.model === "status" && (
+          {props.model === "priorities" && (
             <DataStatus
               selectedIds={selectedIds}
               handleCheckboxChange={handleCheckboxChange}
             />
           )}
 
-          {props.model === "comments" && (
+          {props.model === "defaults" && (
             <DataComments
               selectedIds={selectedIds}
               handleCheckboxChange={handleCheckboxChange}

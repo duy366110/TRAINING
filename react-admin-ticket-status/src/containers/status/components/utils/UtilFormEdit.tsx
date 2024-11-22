@@ -32,19 +32,50 @@ const UtilFormEdit = (props: UtilFormEdit) => {
 
   return (
     <>
-      {props.model === "status" && (
+      {props.model === "priorities" && (
         <Edit id={props.id} resource={props.model} mutationMode="pessimistic">
           <SimpleForm onSubmit={handleSubmit}>
-            <TextInput label="Title" source="title" validate={required()} />
-            <TextInput label="Content" source="content" validate={required()} />
+            <TextInput label="Value" source="value" validate={required()} />
+            <TextInput label="Display" source="display" validate={required()} />
+            <TextInput
+              label="Description"
+              source="description"
+              validate={required()}
+            />
+            <TextInput
+              label="Foreground"
+              source="foreground"
+              validate={required()}
+            />
+            <TextInput
+              label="Background"
+              source="background"
+              validate={required()}
+            />
           </SimpleForm>
         </Edit>
       )}
 
-      {props.model === "comments" && (
+      {props.model === "defaults" && (
         <Edit id={props.id} resource={props.model} mutationMode="pessimistic">
           <SimpleForm onSubmit={handleSubmit}>
-            <TextInput label="Content" source="content" validate={required()} />
+            <TextInput label="Value" source="value" validate={required()} />
+            <TextInput label="Display" source="display" validate={required()} />
+            <TextInput
+              label="Description"
+              source="description"
+              validate={required()}
+            />
+            <TextInput
+              label="Foreground"
+              source="foreground"
+              validate={required()}
+            />
+            <TextInput
+              label="Background"
+              source="background"
+              validate={required()}
+            />
           </SimpleForm>
         </Edit>
       )}

@@ -32,7 +32,7 @@ const DataStatus = (props: DataStatusProps) => {
         )}
       />
 
-      <TextField source="title" label={translate("commons.list.field.value")} />
+      <TextField source="value" label={translate("commons.list.field.value")} />
       <TextField
         source="display"
         label={translate("commons.list.field.display")}
