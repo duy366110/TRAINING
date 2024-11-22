@@ -30,6 +30,7 @@ const ProductFilter = (props: any) => {
 
 const UtilList = (props: any) => {
   const confirm: any = useSelector<RootState>((state) => state.confirm);
+  const translate = useTranslate();
   const dispath = useDispatch<RootDispatch>();
   const notify = useNotify();
 
@@ -49,7 +50,11 @@ const UtilList = (props: any) => {
 
   const openDialogEdit = () => {
     if (selectedIds < 0) {
-      dispath(open({ title: "Edit", message: "Please select a status.", isSave: false }));
+      dispath(open({
+        title: translate("commons.button.edit"),
+        message: translate("commons.confirm.message"),
+        isSave: false
+      }));
       return;
     }
     setDialogEdit(true);
@@ -69,11 +74,19 @@ const UtilList = (props: any) => {
 
   const handleDelete = () => {
     if (selectedIds < 0) {
-      dispath(open({ title: "Delete", message: "Please select a status.", isSave: false }));
+      dispath(open({
+        title: translate("commons.button.delete"),
+        message: translate("commons.confirm.message"),
+        isSave: false
+      }));
       return;
     }
     dispath(
-      open({ title: "delete", message: "Are you sure you want to delete?", isSave: true }),
+      open({
+        title: translate("commons.button.delete"),
+        message: translate("commons.confirm.message"),
+        isSave: true
+      }),
     );
   };
 
@@ -131,12 +144,24 @@ const UtilList = (props: any) => {
           )}
         </ListComponent>
 
-      <DialogComponent open={dialogCreate} onClose={closeDialogCreate}>
+      <DialogComponent
+        titleType={props.model === "defaults"? "resources.default.name" : "resources.priority.name"}
+        titleContent="commons.dialog.create"
+        subTitle="commons.dialog.subTitleCreate"
+        open={dialogCreate}
+        onClose={closeDialogCreate}
+      >
         <UtilFormCreate model={props.model} closeDialog={closeDialogCreate} />
       </DialogComponent>
 
       {selectedIds >= 0 && (
-        <DialogComponent open={dialogEdit} onClose={closeDialogEdit}>
+        <DialogComponent
+          titleType={props.model === "defaults"? "resources.default.name" : "resources.priority.name"}
+          titleContent="commons.dialog.edit"
+          subTitle="commons.dialog.subTitleEdit"
+          open={dialogEdit}
+          onClose={closeDialogEdit}
+        >
           <UtilFormEdit
             model={props.model}
             id={selectedIds}

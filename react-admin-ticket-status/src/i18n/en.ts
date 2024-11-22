@@ -52,6 +52,15 @@ const customEnglishMessages: TranslationMessages = {
             edit: "Edit",
             delete: "Delete"
         },
+        confirm: {
+            message: "Please select a content before performing the action"
+        },
+        dialog: {
+            create: "Create new %{type}",
+            edit: "Edit content %{type}",
+            subTitleCreate: "This is the content that will be created",
+            subTitleEdit: "This is the content that needs to be adjusted"
+        },
         filter: {
             search: "Search",
         },
@@ -70,6 +79,12 @@ const customEnglishMessages: TranslationMessages = {
         },
     },
     resources: {
+        default: {
+            name: "Default",
+        },
+        priority: {
+            name: "Priority"
+        },
         status: {
             name: "Status",
         },

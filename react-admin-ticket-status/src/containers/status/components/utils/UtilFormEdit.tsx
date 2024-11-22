@@ -1,5 +1,15 @@
 import { ReactNode } from "react";
-import { useUpdate, SimpleForm, TextInput, required, Edit } from "react-admin";
+import {
+  useUpdate,
+  SimpleForm,
+  TextInput,
+  required,
+  Edit,
+  SaveButton,
+  DeleteButton,
+  useDelete,
+  useNotify
+} from "react-admin";
 
 interface UtilFormEdit {
   children?: ReactNode;
@@ -10,6 +20,8 @@ interface UtilFormEdit {
 
 const UtilFormEdit = (props: UtilFormEdit) => {
   const [update] = useUpdate(props.model);
+  const [deleteOne, { isLoading }] = useDelete();
+  const notify = useNotify();
 
   const handleSubmit = async (data: any) => {
     try {
@@ -30,11 +42,37 @@ const UtilFormEdit = (props: UtilFormEdit) => {
     }
   };
 
+  const handleDelete = async() => {
+    if(props.id) {
+      deleteOne(
+        props.model,
+        { id: props.id },
+        {
+          onSuccess: () => {
+            notify("Delete success!", { type: "success" });
+            props.closeDialog();
+          },
+          onError: (error) => {
+            notify("Delete unsuccess!", { type: "error" });
+          },
+        },
+      );
+    }
+  }
+
   return (
     <>
       {props.model === "priorities" && (
-        <Edit id={props.id} resource={props.model} mutationMode="pessimistic">
-          <SimpleForm onSubmit={handleSubmit}>
+        <Edit id={props.id} resource={props.model}>
+          <SimpleForm
+            onSubmit={handleSubmit}
+            toolbar={
+              <div style={{padding: "10px", display: "flex", justifyContent: "space-between", width: "100%"}}>
+                <SaveButton/>
+                <DeleteButton onClick={handleDelete} redirect={false} />
+              </div>
+            }
+          >
             <TextInput label="Value" source="value" validate={required()} />
             <TextInput label="Display" source="display" validate={required()} />
             <TextInput
@@ -57,8 +95,16 @@ const UtilFormEdit = (props: UtilFormEdit) => {
       )}
 
       {props.model === "defaults" && (
-        <Edit id={props.id} resource={props.model} mutationMode="pessimistic">
-          <SimpleForm onSubmit={handleSubmit}>
+        <Edit id={props.id} resource={props.model}>
+          <SimpleForm
+            onSubmit={handleSubmit}
+            toolbar={
+              <div style={{padding: "10px", display: "flex", justifyContent: "space-between", width: "100%"}}>
+                <SaveButton/>
+                <DeleteButton onClick={handleDelete} redirect={false} />
+              </div>
+            }
+          >
             <TextInput label="Value" source="value" validate={required()} />
             <TextInput label="Display" source="display" validate={required()} />
             <TextInput

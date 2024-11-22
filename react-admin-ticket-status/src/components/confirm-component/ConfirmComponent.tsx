@@ -1,3 +1,4 @@
+import { useTranslate } from "react-admin";
 import {
   Button,
   Dialog,
@@ -13,6 +14,7 @@ import { close, approve } from "@/stores/slices/sliceConfirm";
 const ConfirmComponent = (props: any) => {
   const confirm: any = useSelector<RootState>((state) => state.confirm);
   const dispath: any = useDispatch<RootDispatch>();
+  const translate = useTranslate();
 
   const closeHandler = () => {
     dispath(close());
