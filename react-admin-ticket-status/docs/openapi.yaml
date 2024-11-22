@@ -15,6 +15,9 @@ paths:
           headers:
             Content-Range:
               description: Số lượng kết quả được trả về
+              schema:
+                type: string
+                example: items 0-5/10
           content:
             application/json:
               schema:
@@ -246,9 +249,9 @@ paths:
           headers:
             Content-Range:
               description: Số lượng kết quả được trả về
-              # schema:
-              #   type: string
-              #   example: items 0-9/50
+              schema:
+                type: string
+                example: items 0-5/10
           content:
             application/json:
               schema:

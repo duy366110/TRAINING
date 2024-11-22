@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
 import {
   TextField,
   Datagrid,
   FunctionField,
   useTranslate,
   useListContext,
+  SortPayload
 } from "react-admin";
 import Checkbox from "@mui/material/Checkbox";
 import { Typography } from "@mui/material";
@@ -15,8 +17,14 @@ interface DataDefaultProps {
 }
 
 const DataDefault = (props: DataDefaultProps) => {
-  const { data, filterValues }: any = useListContext();
   const translate = useTranslate();
+  const { data, filterValues }: any = useListContext();
+  const [localData, setLocalData] = useState<Array<any>>([]);
+  const [sort, setSort] = useState<SortPayload>({
+    field: "value",
+    order: "ASC",
+  });
+  const [isSort, setIsSort] = useState<boolean>(false);
 
   const renderCustomField = (record: any, filed: string) => {
     if (["Lowest", "Red"].includes(record[filed])) {
@@ -28,52 +36,43 @@ const DataDefault = (props: DataDefaultProps) => {
     return null;
   };
 
-  const filteredData: any = data?.filter((prorities: any) => {
-    if (
-      filterValues.value &&
-      !prorities.value.toLowerCase().includes(filterValues.value.toLowerCase())
-    ) {
-      return false;
-    }
+  const handleSortChange = (sort: SortPayload) => {
+    setIsSort(true);
+    setSort(sort);
+  };
 
-    if (
-      filterValues.display &&
-      !prorities.display
-        .toLowerCase()
-        .includes(filterValues.display.toLowerCase())
-    ) {
-      return false;
+  useEffect(() => {
+    if (Array.isArray(data)) {
+      setLocalData([...data]);
     }
+  }, []);
 
-    if (
-      filterValues.description &&
-      !prorities.description
-        .toLowerCase()
-        .includes(filterValues.description.toLowerCase())
-    ) {
-      return false;
+  useEffect(() => {
+    if (isSort) {
+      const sortedData = [...data].sort((a, b) => {
+        const field = sort.field;
+        const order = sort.order === "ASC" ? 1 : -1;
+
+        if (a[field] < b[field]) return -1 * order;
+        if (a[field] > b[field]) return 1 * order;
+        return 0;
+      });
+
+      setIsSort(false);
+      setLocalData(sortedData);
     }
+  }, [isSort]);
 
-    if (
-      filterValues.foreground &&
-      !prorities.foreground
-        .toLowerCase()
-        .includes(filterValues.foreground.toLowerCase())
-    ) {
-      return false;
+  useEffect(() => {
+    if (Array.isArray(localData)) {
+      const filterData = localData.filter((item: any) => {
+        return item.value
+          .toLowerCase()
+          .includes(filterValues?.value?.toLowerCase() || "");
+      });
+      setLocalData(filterData.length ? filterData : data);
     }
-
-    if (
-      filterValues.background &&
-      !prorities.background
-        .toLowerCase()
-        .includes(filterValues.background.toLowerCase())
-    ) {
-      return false;
-    }
-
-    return true;
-  });
+  }, [filterValues]);
 
   return (
     <Datagrid
@@ -81,7 +80,9 @@ const DataDefault = (props: DataDefaultProps) => {
       rowClick={(id, basePath, record) => {
         return false;
       }}
-      data={filteredData}
+      data={localData}
+      setSort={handleSortChange}
+      sort={sort}
     >
       <FunctionField
         label="NO"
