@@ -1,17 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
-import {
-  List,
-  DatagridConfigurable,
-  TextField,
-  ReferenceField,
-  Datagrid,
-  FunctionField,
-  useDelete,
-  Filter,
-  useNotify,
-  SearchInput
-} from "react-admin";
+import { useState } from "react";
 import TabComponent from "@/components/tab-component/TabComponent";
 
 import UtilList from "./utils/UtilList";
@@ -28,16 +16,6 @@ const StatusList = (props: any) => {
       <>
         {value === 0 && (<UtilList model="status" />)}
         {value === 1 && (<UtilList model="comments" />)}
-        {/* {value === 1 && (
-          <div>
-            <List resource="comments" perPage={10}>
-              <DatagridConfigurable>
-                <TextField source="id" label="ID" />
-                <TextField source="content" label="Người bình luận" />
-              </DatagridConfigurable>
-            </List>
-          </div>
-        )} */}
       </>
     </TabComponent>
   );

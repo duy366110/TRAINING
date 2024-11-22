@@ -1,0 +1,170 @@
+openapi: 3.0.0
+info:
+  title: API Example
+  description: Đây là API giả lập để phát triển frontend khi backend chưa hoàn thiện.
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:4010/api'  # URL của mock server, có thể thay đổi tùy theo môi trường của bạn
+paths:
+  /status:
+    get:
+      summary: Lấy danh sách status
+      responses:
+        '200':
+          description: Thành công
+          headers:
+            Content-Range:
+              description: Số lượng kết quả được trả về
+              schema:
+                type: string
+                example: items 0-9/50
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    display:
+                      type: string
+                    description:
+                      type: string
+                    foreground:
+                      type: string
+                    background:
+                      type: string
+                example:
+                  - id: 1
+                    title: "Title 1"
+                    display: "Display 1"
+                    description: "Description 1"
+                    foreground: "Foreground 1"
+                    background: "Background 1"
+                  - id: 2
+                    title: "Title 2"
+                    display: "Display 2"
+                    description: "Description 2"
+                    foreground: "Foreground 2"
+                    background: "Background 2"
+                  - id: 3
+                    title: "Title 3"
+                    display: "Display 3"
+                    description: "Description 3"
+                    foreground: "Foreground 3"
+                    background: "Background 3"
+                  - id: 4
+                    title: "Title 4"
+                    display: "Display 4"
+                    description: "Description 4"
+                    foreground: "Foreground 4"
+                    background: "Background 4"
+                  - id: 5
+                    title: "Title 5"
+                    display: "Display 5"
+                    description: "Description 5"
+                    foreground: "Foreground 5"
+                    background: "Background 5"
+    post:
+      summary: Thêm người dùng mới
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                display:
+                  type: string
+                description:
+                  type: string
+                foreground:
+                  type: string
+                background:
+                  type: string
+      responses:
+        '201':
+          description: Người dùng đã được tạo thành công
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 50
+                  title:
+                    type: string
+                    example: "Title 5"
+                  display:
+                    type: string
+                    example: "display 50"
+                  description:
+                    type: string
+                    example: "description 50"
+                  foreground:
+                    type: string
+                    example: "foreground 50"
+                  background:
+                    type: string
+                    example: "background 50"
+
+  /users:
+    get:
+      summary: Lấy danh sách người dùng
+      responses:
+        '200':
+          description: Thành công
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+    post:
+      summary: Thêm người dùng mới
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '201':
+          description: Người dùng đã được tạo thành công
+  /users/{id}:
+    get:
+      summary: Lấy thông tin người dùng theo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Thành công
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+        '404':
+          description: Người dùng không tồn tại

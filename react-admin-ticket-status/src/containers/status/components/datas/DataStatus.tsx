@@ -3,15 +3,18 @@ import {
   ReferenceField,
   Datagrid,
   FunctionField,
+  useTranslate,
 } from "react-admin";
 import Checkbox from "@mui/material/Checkbox";
 
 interface DataStatusProps {
-    selectedIds: number;
-    handleCheckboxChange: (id: number) => any
+  selectedIds: number;
+  handleCheckboxChange: (id: number) => any;
 }
 
 const DataStatus = (props: DataStatusProps) => {
+  const translate = useTranslate();
+
   return (
     <Datagrid
       bulkActionButtons={false}
@@ -20,7 +23,7 @@ const DataStatus = (props: DataStatusProps) => {
       }}
     >
       <FunctionField
-        label="Select"
+        label="NO"
         render={(record: any) => (
           <Checkbox
             checked={props.selectedIds === record?.id}
@@ -29,12 +32,23 @@ const DataStatus = (props: DataStatusProps) => {
         )}
       />
 
-      <TextField source="id" label="ID" />
-      <TextField source="title" label="Tiêu đề" />
-      <TextField source="body" label="Nội dung" />
-      <ReferenceField source="userId" reference="users" label="Tác giả">
-        <TextField source="name" />
-      </ReferenceField>
+      <TextField source="title" label={translate("commons.list.field.value")} />
+      <TextField
+        source="display"
+        label={translate("commons.list.field.display")}
+      />
+      <TextField
+        source="display"
+        label={translate("commons.list.field.description")}
+      />
+      <TextField
+        source="display"
+        label={translate("commons.list.field.foreground")}
+      />
+      <TextField
+        source="display"
+        label={translate("commons.list.field.background")}
+      />
     </Datagrid>
   );
 };

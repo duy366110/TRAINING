@@ -15,6 +15,9 @@ const UtilFormCreate = (props: UtilFormCreateProps) => {
   const [create] = useCreate(props.model);
 
   const handleSubmit = async (data: any) => {
+    console.log(props.model);
+    console.log(data);
+
     try {
       await create(
         props.model,
@@ -38,8 +41,12 @@ const UtilFormCreate = (props: UtilFormCreateProps) => {
       {props.model === "status" && (
         <Create>
           <SimpleForm onSubmit={handleSubmit}>
-            <TextInput label="Title" source="title" validate={required()} />
-            <TextInput label="Body" source="body" validate={required()} />
+            {/* <TextInput hidden={true} label="Value" source="id" defaultValue={110} /> */}
+            <TextInput label="Value" source="value" validate={required()} />
+            <TextInput label="Display" source="display" validate={required()} />
+            <TextInput label="Description" source="description" validate={required()} />
+            <TextInput label="Foreground" source="foreground" validate={required()} />
+            <TextInput label="Background" source="background" validate={required()} />
           </SimpleForm>
         </Create>
       )}

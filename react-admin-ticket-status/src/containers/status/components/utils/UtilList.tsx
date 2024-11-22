@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 import {
-  // TextField,
-  // ReferenceField,
-  // Datagrid,
-  // FunctionField,
   useDelete,
   Filter,
   useNotify,
   SearchInput,
+  useTranslate
 } from "react-admin";
 import { useDispatch, useSelector } from "react-redux";
 import { RootDispatch, RootState } from "@/stores";
@@ -21,11 +18,15 @@ import UtilFormEdit from "./UtilFormEdit";
 import DataStatus from "../datas/DataStatus";
 import DataComments from "../datas/DataComments";
 
-const ProductFilter = (props: any) => (
-  <Filter {...props}>
-    <SearchInput source="q" alwaysOn placeholder="Tìm kiếm bài viết" />
-  </Filter>
-);
+const ProductFilter = (props: any) => {
+  const translate = useTranslate();
+
+  return (
+    <Filter {...props}>
+      <SearchInput source="q" alwaysOn placeholder={translate("commons.filter.search")} />
+    </Filter>
+  );
+}
 
 const UtilList = (props: any) => {
   const confirm: any = useSelector<RootState>((state) => state.confirm);
@@ -59,6 +60,10 @@ const UtilList = (props: any) => {
   };
 
   const handleCheckboxChange = (id: number) => {
+    if(id === selectedIds) {
+      setSelectedIds(-1);
+      return;
+    }
     setSelectedIds(id);
   };
 
@@ -73,7 +78,6 @@ const UtilList = (props: any) => {
   };
 
   useEffect(() => {
-    console.log(confirm.value);
     if (confirm.value && selectedIds >= 0) {
       deleteOne(
         props.model,

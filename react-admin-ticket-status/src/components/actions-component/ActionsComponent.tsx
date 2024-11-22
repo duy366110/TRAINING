@@ -1,4 +1,4 @@
-import { TopToolbar, DeleteButton } from "react-admin";
+import { TopToolbar, useTranslate } from "react-admin";
 import { Button } from "@mui/material";
 
 interface ActionsComponentProps {
@@ -9,6 +9,8 @@ interface ActionsComponentProps {
 }
 
 const ActionsComponent = (props: ActionsComponentProps) => {
+  const translate = useTranslate();
+
   return (
     <>
       {props.types === "status" && (
@@ -18,7 +20,7 @@ const ActionsComponent = (props: ActionsComponentProps) => {
             color="primary"
             onClick={props.onOpenCreate}
           >
-            + Create
+            + {translate("commons.button.create")}
           </Button>
 
           <Button
@@ -26,11 +28,11 @@ const ActionsComponent = (props: ActionsComponentProps) => {
             color="primary"
             onClick={props.onOpenEdit}
           >
-            Edit
+            {translate("commons.button.edit")}
           </Button>
 
           <Button onClick={props.onDelete} variant="contained" color="error">
-            Delete
+            {translate("commons.button.delete")}
           </Button>
         </TopToolbar>
       )}
@@ -42,7 +44,7 @@ const ActionsComponent = (props: ActionsComponentProps) => {
             color="primary"
             onClick={props.onOpenCreate}
           >
-            + Create
+            + {translate("commons.button.create")}
           </Button>
 
           <Button
@@ -50,11 +52,11 @@ const ActionsComponent = (props: ActionsComponentProps) => {
             color="primary"
             onClick={props.onOpenEdit}
           >
-            Edit
+            {translate("commons.button.edit")}
           </Button>
 
           <Button onClick={props.onDelete} variant="contained" color="error">
-            Delete
+            {translate("commons.button.delete")}
           </Button>
         </TopToolbar>
       )}
