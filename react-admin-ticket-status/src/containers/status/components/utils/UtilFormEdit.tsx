@@ -21,9 +21,9 @@ interface UtilFormEdit {
 }
 
 const UtilFormEdit = (props: UtilFormEdit) => {
-  const { identity, isLoading: isLoadingIdentity, error: errorIdentity }: any = useGetIdentity();
+  const { identity }: any = useGetIdentity();
   const [update] = useUpdate(props.model);
-  const [deleteOne, { isLoading }] = useDelete();
+  const [deleteOne] = useDelete();
   const notify = useNotify();
   const translate = useTranslate();
 

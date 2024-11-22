@@ -1,4 +1,10 @@
-import { TextField, Datagrid, FunctionField, useTranslate } from "react-admin";
+import {
+  TextField,
+  Datagrid,
+  FunctionField,
+  useTranslate,
+  useListContext,
+} from "react-admin";
 import Checkbox from "@mui/material/Checkbox";
 import { Typography } from "@mui/material";
 import FieldFunctionComponent from "@/components/fields-component/field-function-component/FieldFunctionComponent";
@@ -9,6 +15,7 @@ interface DataDefaultProps {
 }
 
 const DataDefault = (props: DataDefaultProps) => {
+  const { data, filterValues }: any = useListContext();
   const translate = useTranslate();
 
   const renderCustomField = (record: any, filed: string) => {
@@ -21,12 +28,60 @@ const DataDefault = (props: DataDefaultProps) => {
     return null;
   };
 
+  const filteredData: any = data?.filter((prorities: any) => {
+    if (
+      filterValues.value &&
+      !prorities.value.toLowerCase().includes(filterValues.value.toLowerCase())
+    ) {
+      return false;
+    }
+
+    if (
+      filterValues.display &&
+      !prorities.display
+        .toLowerCase()
+        .includes(filterValues.display.toLowerCase())
+    ) {
+      return false;
+    }
+
+    if (
+      filterValues.description &&
+      !prorities.description
+        .toLowerCase()
+        .includes(filterValues.description.toLowerCase())
+    ) {
+      return false;
+    }
+
+    if (
+      filterValues.foreground &&
+      !prorities.foreground
+        .toLowerCase()
+        .includes(filterValues.foreground.toLowerCase())
+    ) {
+      return false;
+    }
+
+    if (
+      filterValues.background &&
+      !prorities.background
+        .toLowerCase()
+        .includes(filterValues.background.toLowerCase())
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+
   return (
     <Datagrid
       bulkActionButtons={false}
       rowClick={(id, basePath, record) => {
         return false;
       }}
+      data={filteredData}
     >
       <FunctionField
         label="NO"
@@ -34,8 +89,8 @@ const DataDefault = (props: DataDefaultProps) => {
           <Checkbox
             checked={props.selectedIds === record?.id}
             onChange={() => {
-              if(!record?.default) {
-                props.handleCheckboxChange(record.id)
+              if (!record?.default) {
+                props.handleCheckboxChange(record.id);
               }
             }}
           />
