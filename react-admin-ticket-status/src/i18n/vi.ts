@@ -51,7 +51,16 @@ const customVietnameseMessages: TranslationMessages = {
             create: "Tạo mới",
             edit: "Chỉnh sửa",
             delete: "Xóa"
-        },        
+        },
+        confirm: {
+            message: "Hãy chọn một nội dung trước khi thực hiện chức năng"
+        },
+        dialog: {
+            create: "Tạo mới %{type}",
+            edit: "Chỉnh sửa nội dung %{type}",
+            subTitleCreate: "Đây là phần nội dung sẽ tạo mới",
+            subTitleEdit: "Đây là phần nội dung cần điều chỉnh"
+        },          
         filter: {
             search: "Tìm kiếm",
         },
@@ -70,6 +79,12 @@ const customVietnameseMessages: TranslationMessages = {
         }        
     },
     resources: {
+        default: {
+            name: "Mặc định",
+        },
+        priority: {
+            name: "Độ ưu tiên"
+        },
         status: {
             name: "Trạng thái",
         },        

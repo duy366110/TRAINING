@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { useTranslate } from "react-admin";
 import {
   Button,
   Dialog,
@@ -11,17 +12,20 @@ import {
 interface DialogComponentProps {
   children?: ReactNode;
   open?:boolean;
+  titleType?: string;
+  titleContent?: string;
+  subTitle?: string;
   onClose?: () => void
 }
 
 const DialogComponent = (props: DialogComponentProps) => {
+  let translate = useTranslate();
+
   return (
     <Dialog open={props.open || false} onClose={props.onClose}>
-      <DialogTitle>Add New Comment</DialogTitle>
+      <DialogTitle>{translate(`${props.titleContent}`, {type: translate(`${props.titleType}`)})}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          Please fill in the information below to add a new comment.
-        </DialogContentText>
+        <DialogContentText style={{width: "460px"}}>{translate(`${props.subTitle}`)}</DialogContentText>
         {props.children}
       </DialogContent>
 
