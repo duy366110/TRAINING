@@ -5,7 +5,7 @@ import {
   useNotify,
   SearchInput,
   useTranslate,
-  useGetIdentity
+  useGetIdentity,
 } from "react-admin";
 import { useDispatch, useSelector } from "react-redux";
 import { RootDispatch, RootState } from "@/stores";
@@ -24,7 +24,10 @@ const ProductFilter = (props: any) => {
 
   return (
     <Filter {...props}>
-      <SearchInput source="value" alwaysOn placeholder={translate("commons.filter.search")} />
+      <SearchInput
+        source="value"
+        alwaysOn
+        placeholder={translate("commons.filter.search")} />
     </Filter>
   );
 }
@@ -32,6 +35,7 @@ const ProductFilter = (props: any) => {
 const UtilList = (props: any) => {
   const { identity, isLoading: isLoadingIdentity, error: errorIdentity }: any = useGetIdentity();
   const confirm: any = useSelector<RootState>((state) => state.confirm);
+  // const { data, filterValues }: any = useListContext();
   const translate = useTranslate();
   const dispath = useDispatch<RootDispatch>();
   const notify = useNotify();
@@ -121,7 +125,6 @@ const UtilList = (props: any) => {
 
   return (
     <>
-      
         <ListComponent
           resource={props.model}
           isActions={true}

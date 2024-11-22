@@ -1,9 +1,9 @@
 import {
   TextField,
-  ReferenceField,
   Datagrid,
   FunctionField,
   useTranslate,
+  useListContext,
 } from "react-admin";
 import FieldFunctionComponent from "@/components/fields-component/field-function-component/FieldFunctionComponent";
 import Checkbox from "@mui/material/Checkbox";
@@ -16,6 +16,7 @@ interface DataStatusProps {
 
 const DataStatus = (props: DataStatusProps) => {
   const translate = useTranslate();
+  const { data, filterValues }: any = useListContext();
 
   const renderCustomField = (record: any, filed: string) => {
     if (["Lowest", "Red"].includes(record[filed])) {
@@ -35,12 +36,20 @@ const DataStatus = (props: DataStatusProps) => {
     return null;
   };
 
+  const filteredData: any = data?.filter((prorities: any) => {
+    if (filterValues.value && !prorities.value.toLowerCase().includes(filterValues.value.toLowerCase())) {
+      return false;
+    }
+    return true;
+  });
+
   return (
     <Datagrid
       bulkActionButtons={false}
       rowClick={(id, basePath, record) => {
         return false;
       }}
+      data={filteredData}
     >
       <FunctionField
         label="NO"
