@@ -10,7 +10,7 @@ import {
   useDelete,
   useNotify,
   useGetIdentity,
-  useTranslate
+  useTranslate,
 } from "react-admin";
 
 interface UtilFormEdit {
@@ -28,7 +28,10 @@ const UtilFormEdit = (props: UtilFormEdit) => {
   const translate = useTranslate();
 
   const handleSubmit = async (data: any) => {
-    if(["admin", "edit"].includes(identity.role) && identity.permissions?.includes('edit')) {
+    if (
+      ["admin", "edit"].includes(identity.role) &&
+      identity.permissions?.includes("edit")
+    ) {
       try {
         await update(
           props.model,
@@ -50,9 +53,9 @@ const UtilFormEdit = (props: UtilFormEdit) => {
     }
   };
 
-  const handleDelete = async() => {
-    if(identity.role === "admin" && identity.permissions?.includes('delete')) {
-      if(props.id) {
+  const handleDelete = async () => {
+    if (identity.role === "admin" && identity.permissions?.includes("delete")) {
+      if (props.id) {
         deleteOne(
           props.model,
           { id: props.id },
@@ -70,7 +73,7 @@ const UtilFormEdit = (props: UtilFormEdit) => {
     } else {
       notify(translate("commons.notify.notPermission"), { type: "error" });
     }
-  }
+  };
 
   return (
     <>
@@ -79,8 +82,15 @@ const UtilFormEdit = (props: UtilFormEdit) => {
           <SimpleForm
             onSubmit={handleSubmit}
             toolbar={
-              <div style={{padding: "10px", display: "flex", justifyContent: "space-between", width: "100%"}}>
-                <SaveButton/>
+              <div
+                style={{
+                  padding: "10px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <SaveButton />
                 <DeleteButton onClick={handleDelete} redirect={false} />
               </div>
             }
@@ -111,8 +121,15 @@ const UtilFormEdit = (props: UtilFormEdit) => {
           <SimpleForm
             onSubmit={handleSubmit}
             toolbar={
-              <div style={{padding: "10px", display: "flex", justifyContent: "space-between", width: "100%"}}>
-                <SaveButton/>
+              <div
+                style={{
+                  padding: "10px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <SaveButton />
                 <DeleteButton onClick={handleDelete} redirect={false} />
               </div>
             }
