@@ -2,7 +2,6 @@ import { Admin, Resource, useStore } from "react-admin";
 import { Provider } from "react-redux";
 import CustomLayout from "@/layouts/LayoutCustom";
 import { themes, ThemeName } from "@/themes/themes";
-import { dataProvider } from "@/providers/dataProvider";
 import dataProviderFactory from "@/providers";
 import { authProvider } from "@/providers/authProvider";
 import { i18nProvider } from "@/providers/i18nProvider";
@@ -18,10 +17,7 @@ const App = () => {
   return (
     <Admin
       layout={CustomLayout}
-      // dataProvider={dataProvider}
-      dataProvider={dataProviderFactory(
-        "",
-      )}
+      dataProvider={dataProviderFactory("",)}
       authProvider={authProvider}
       i18nProvider={i18nProvider}
       lightTheme={lightTheme}

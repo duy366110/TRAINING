@@ -13,7 +13,7 @@ const ActionsComponent = (props: ActionsComponentProps) => {
 
   return (
     <>
-      {props.types === "status" && (
+      {props.types === "priorities" && (
         <TopToolbar>
           <Button
             variant="contained"
@@ -37,7 +37,7 @@ const ActionsComponent = (props: ActionsComponentProps) => {
         </TopToolbar>
       )}
 
-      {props.types === "comments" && (
+      {props.types === "defaults" && (
         <TopToolbar>
           <Button
             variant="contained"

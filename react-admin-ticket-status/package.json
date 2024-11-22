@@ -8,6 +8,7 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx ./src",
     "format": "prettier --write ./src",
+    "mock": "npx prism mock ./docs/openapi.yaml",
     "test": "vitest"
   },
   "dependencies": {
