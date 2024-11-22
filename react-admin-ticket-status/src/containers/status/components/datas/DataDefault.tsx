@@ -1,36 +1,22 @@
-import {
-  TextField,
-  ReferenceField,
-  Datagrid,
-  FunctionField,
-  useTranslate,
-} from "react-admin";
-import FieldFunctionComponent from "@/components/fields-component/field-function-component/FieldFunctionComponent";
+import { TextField, Datagrid, FunctionField, useTranslate } from "react-admin";
 import Checkbox from "@mui/material/Checkbox";
 import { Typography } from "@mui/material";
+import FieldFunctionComponent from "@/components/fields-component/field-function-component/FieldFunctionComponent";
 
-interface DataStatusProps {
+interface DataDefaultProps {
   selectedIds: number;
   handleCheckboxChange: (id: number) => any;
 }
 
-const DataStatus = (props: DataStatusProps) => {
+const DataDefault = (props: DataDefaultProps) => {
   const translate = useTranslate();
 
   const renderCustomField = (record: any, filed: string) => {
     if (["Lowest", "Red"].includes(record[filed])) {
-      return (
-        <Typography color={"red"}>
-          {record?.value}
-        </Typography>
-      );
+      return <Typography color={"red"}>{record?.value}</Typography>;
     }
-    if (["Hightset","Green"].includes(record[filed])) {
-      return (
-        <Typography color={"green"}>
-          {record.value}
-        </Typography>
-      );
+    if (["Hightset", "Green"].includes(record[filed])) {
+      return <Typography color={"green"}>{record.value}</Typography>;
     }
     return null;
   };
@@ -63,7 +49,7 @@ const DataStatus = (props: DataStatusProps) => {
         filed="display"
         render={renderCustomField}
       />
-      
+
       <TextField
         source="description"
         label={translate("commons.list.field.description")}
@@ -83,4 +69,4 @@ const DataStatus = (props: DataStatusProps) => {
   );
 };
 
-export default DataStatus;
+export default DataDefault;

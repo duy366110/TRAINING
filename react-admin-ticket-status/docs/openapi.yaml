@@ -39,34 +39,34 @@ paths:
                       type: string
                 example:
                   - id: 1
-                    value: "Title 1"
-                    display: "Display 1"
+                    value: "Lowest"
+                    display: "Hightset"
                     description: "Description 1"
-                    foreground: "Foreground 1"
+                    foreground: "Red"
                     background: "Background 1"
                   - id: 2
-                    value: "Title 2"
-                    display: "Display 2"
+                    value: "Hightset"
+                    display: "Hightset"
                     description: "Description 2"
-                    foreground: "Foreground 2"
+                    foreground: "Red"
                     background: "Background 2"
                   - id: 3
-                    value: "Title 3"
-                    display: "Display 3"
+                    value: "Lowest"
+                    display: "Lowest"
                     description: "Description 3"
-                    foreground: "Foreground 3"
+                    foreground: "Green"
                     background: "Background 3"
                   - id: 4
-                    value: "Title 4"
-                    display: "Display 4"
+                    value: "Lowest"
+                    display: "Hightset"
                     description: "Description 4"
-                    foreground: "Foreground 4"
+                    foreground: "Red"
                     background: "Background 4"
                   - id: 5
-                    value: "Title 5"
-                    display: "Display 5"
+                    value: "Hightset"
+                    display: "Lowest"
                     description: "Description 5"
-                    foreground: "Foreground 5"
+                    foreground: "Green"
                     background: "Background 5"
     post:
       summary: Thêm người dùng mới
@@ -100,7 +100,7 @@ paths:
                     example: 50
                   value:
                     type: string
-                    example: "Title 5"
+                    example: "Title 50"
                   display:
                     type: string
                     example: "display 50"
@@ -266,34 +266,34 @@ paths:
                       type: string
                 example:
                   - id: 1
-                    value: "Title 1"
-                    display: "Display 1"
+                    value: "Lowest"
+                    display: "Hightset"
                     description: "Description 1"
-                    foreground: "Foreground 1"
+                    foreground: "Red"
                     background: "Background 1"
                   - id: 2
-                    value: "Title 2"
-                    display: "Display 2"
+                    value: "Hightset"
+                    display: "Hightset"
                     description: "Description 2"
-                    foreground: "Foreground 2"
+                    foreground: "Red"
                     background: "Background 2"
                   - id: 3
-                    value: "Title 3"
-                    display: "Display 3"
+                    value: "Lowest"
+                    display: "Lowest"
                     description: "Description 3"
-                    foreground: "Foreground 3"
+                    foreground: "Green"
                     background: "Background 3"
                   - id: 4
-                    value: "Title 4"
-                    display: "Display 4"
+                    value: "Lowest"
+                    display: "Hightset"
                     description: "Description 4"
-                    foreground: "Foreground 4"
+                    foreground: "Red"
                     background: "Background 4"
                   - id: 5
-                    value: "Title 5"
-                    display: "Display 5"
+                    value: "Hightset"
+                    display: "Lowest"
                     description: "Description 5"
-                    foreground: "Foreground 5"
+                    foreground: "Green"
                     background: "Background 5"
 
     post:

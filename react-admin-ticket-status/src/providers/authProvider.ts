@@ -14,6 +14,13 @@ export const authProvider: AuthProvider = {
       // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
       let { password, ...userToPersist } = user;
       localStorage.setItem("user", JSON.stringify(userToPersist));
+
+      let identify = {
+        role: userToPersist.role,
+        permissions: userToPersist.permissions,
+      };
+
+      localStorage.setItem("permisson", JSON.stringify(identify));
       return Promise.resolve();
     }
 
@@ -31,7 +38,19 @@ export const authProvider: AuthProvider = {
   checkAuth: () =>
     localStorage.getItem("user") ? Promise.resolve() : Promise.reject(),
   getPermissions: () => {
-    return Promise.resolve(undefined);
+    let user: any = localStorage.getItem("user");
+    let identify = {
+      role: null,
+      permissions: [],
+    };
+
+    if (user) {
+      user = JSON.parse(user);
+      identify.role = user.role;
+      identify.permissions = user.permissions;
+    }
+
+    return Promise.resolve("admin");
   },
   getIdentity: () => {
     const persistedUser = localStorage.getItem("user");

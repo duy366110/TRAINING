@@ -16,7 +16,7 @@ import UtilFormCreate from "./UtilFormCreate";
 import UtilFormEdit from "./UtilFormEdit";
 
 import DataStatus from "../datas/DataStatus";
-import DataComments from "../datas/DataComments";
+import DataDefault from "../datas/DataDefault";
 
 const ProductFilter = (props: any) => {
   const translate = useTranslate();
@@ -137,7 +137,7 @@ const UtilList = (props: any) => {
           )}
 
           {props.model === "defaults" && (
-            <DataComments
+            <DataDefault
               selectedIds={selectedIds}
               handleCheckboxChange={handleCheckboxChange}
             />

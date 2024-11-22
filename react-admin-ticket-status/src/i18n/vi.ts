@@ -76,7 +76,10 @@ const customVietnameseMessages: TranslationMessages = {
         tabs: {
             default: "Mặc định",
             priority: "Ưu tiên"
-        }        
+        },
+        notify: {
+            notPermission:"Không thực hiện chức năng!",
+        }      
     },
     resources: {
         default: {
