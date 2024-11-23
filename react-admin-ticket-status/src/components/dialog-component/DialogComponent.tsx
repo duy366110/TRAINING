@@ -29,11 +29,11 @@ const DialogComponent = (props: DialogComponentProps) => {
         {props.children}
       </DialogContent>
 
-      <DialogActions>
+      {false && (<DialogActions>
         <Button onClick={props.onClose} color="secondary">
           Cancel
         </Button>
-      </DialogActions>
+      </DialogActions>)}
     </Dialog>
   );
 };

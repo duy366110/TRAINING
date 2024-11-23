@@ -5,8 +5,8 @@ import {
   TextInput,
   required,
 } from "react-admin";
-import FieldColorComponent from "@/components/fields-component/field-color-component/FieldColorComponent";
 import ColorComponent from "@/components/color-component/ColorComponent";
+import ActionsFormComponent from "@/components/actions-form-component/ActionsFormComponent";
 
 interface UtilFormCreateProps {
   model: string;
@@ -39,76 +39,60 @@ const UtilFormCreate = (props: UtilFormCreateProps) => {
     <>
       {props.model === "priorities" && (
         <Create>
-          <SimpleForm onSubmit={handleSubmit}>
-            <FieldColorComponent
+          <SimpleForm
+            onSubmit={handleSubmit}
+            toolbar={<ActionsFormComponent onCancel={props.closeDialog} actionsType="created" />}
+          >
+            <TextInput
               label="Value"
-              labelColor="Value color"
               source="value"
-              color="value-color"
+              validate={required()}
             />
 
-            <FieldColorComponent
+            <TextInput
               label="Display"
-              labelColor="Display color"
               source="display"
-              color="display-color"
+              validate={required()}
             />
-
-            {/* <FieldColorComponent
-              label="Foreground"
-              labelColor="Foreground color"
-              source="foreground"
-              color="foreground-color"
-            /> */}
-
-            {/* <FieldColorComponent
-              label="Background"
-              labelColor="Background color"
-              source="background"
-              color="background-color"
-            /> */}
 
             <TextInput
               label="Description"
               source="description"
               validate={required()}
             />
-
-            <ColorComponent source="foreground" />
-            <ColorComponent source="background" />
+            
+            <div className="flex gap-10">
+              <ColorComponent
+                label="Foreground"
+                source="foreground"
+                colorDemo="#ffffff"
+              />
+              <ColorComponent
+                label="Background"
+                source="background"
+                colorDemo="#000000"
+              />
+            </div>
           </SimpleForm>
         </Create>
       )}
 
       {props.model === "defaults" && (
         <Create>
-          <SimpleForm onSubmit={handleSubmit}>
-          <FieldColorComponent
+          <SimpleForm
+            onSubmit={handleSubmit}
+            toolbar={<ActionsFormComponent onCancel={props.closeDialog} actionsType="created" />}
+          >
+            <TextInput
               label="Value"
-              labelColor="Value color"
               source="value"
-              color="value-color"
+              validate={required()}
             />
 
-            <FieldColorComponent
+            <TextInput
               label="Display"
-              labelColor="Display color"
               source="display"
-              color="display-color"
-            />
-
-            <FieldColorComponent
-              label="Foreground"
-              labelColor="Foreground color"
-              source="foreground"
-              color="foreground-color"
-            />
-
-            <FieldColorComponent
-              label="Background"
-              labelColor="Background color"
-              source="background"
-              color="background-color"
+              validate={required()}
             />
 
             <TextInput
@@ -116,39 +100,39 @@ const UtilFormCreate = (props: UtilFormCreateProps) => {
               source="description"
               validate={required()}
             />
+            
+            <div className="flex gap-10">
+              <ColorComponent
+                label="Foreground"
+                source="foreground"
+                colorDemo="#ffffff"
+              />
+              <ColorComponent
+                label="Background"
+                source="background"
+                colorDemo="#000000"
+              />
+            </div>
           </SimpleForm>
         </Create>
       )}
 
       {props.model === "status" && (
         <Create>
-          <SimpleForm onSubmit={handleSubmit}>
-          <FieldColorComponent
+          <SimpleForm
+            onSubmit={handleSubmit}
+            toolbar={<ActionsFormComponent onCancel={props.closeDialog} actionsType="created" />}
+          >
+            <TextInput
               label="Value"
-              labelColor="Value color"
               source="value"
-              color="value-color"
+              validate={required()}
             />
 
-            <FieldColorComponent
+            <TextInput
               label="Display"
-              labelColor="Display color"
               source="display"
-              color="display-color"
-            />
-
-            <FieldColorComponent
-              label="Foreground"
-              labelColor="Foreground color"
-              source="foreground"
-              color="foreground-color"
-            />
-
-            <FieldColorComponent
-              label="Background"
-              labelColor="Background color"
-              source="background"
-              color="background-color"
+              validate={required()}
             />
 
             <TextInput
@@ -156,6 +140,19 @@ const UtilFormCreate = (props: UtilFormCreateProps) => {
               source="description"
               validate={required()}
             />
+            
+            <div className="flex gap-10">
+              <ColorComponent
+                label="Foreground"
+                source="foreground"
+                colorDemo="#ffffff"
+              />
+              <ColorComponent
+                label="Background"
+                source="background"
+                colorDemo="#000000"
+              />
+            </div>
           </SimpleForm>
         </Create>
       )}

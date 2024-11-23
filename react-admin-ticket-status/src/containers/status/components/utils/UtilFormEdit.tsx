@@ -5,15 +5,13 @@ import {
   TextInput,
   required,
   Edit,
-  SaveButton,
-  DeleteButton,
   useDelete,
   useNotify,
   useGetIdentity,
   useTranslate,
 } from "react-admin";
-import FieldColorComponent from "@/components/fields-component/field-color-component/FieldColorComponent";
-
+import ColorComponent from "@/components/color-component/ColorComponent";
+import ActionsFormComponent from "@/components/actions-form-component/ActionsFormComponent";
 
 interface UtilFormEdit {
   children?: ReactNode;
@@ -83,55 +81,29 @@ const UtilFormEdit = (props: UtilFormEdit) => {
         <Edit id={props.id} resource={props.model}>
           <SimpleForm
             onSubmit={handleSubmit}
-            toolbar={
-              <div
-                style={{
-                  padding: "10px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <SaveButton />
-                <DeleteButton onClick={handleDelete} redirect={false} />
-              </div>
-            }
+            toolbar={<ActionsFormComponent actionsType="edited" onCancel={props.closeDialog} onDelete={handleDelete} redirect={false} />}
           >
-
-            <FieldColorComponent
-              label="Value"
-              labelColor="Value color"
-              source="value"
-              color="value-color"
-            />
-
-            <FieldColorComponent
-              label="Display"
-              labelColor="Display color"
-              source="display"
-              color="display-color"
-            />
-
-            <FieldColorComponent
-              label="Foreground"
-              labelColor="Foreground color"
-              source="foreground"
-              color="foreground-color"
-            />
-
-            <FieldColorComponent
-              label="Background"
-              labelColor="Background color"
-              source="background"
-              color="background-color"
-            />
+            <TextInput label="Value" source="value" validate={required()} />
+            <TextInput label="Display" source="display" validate={required()} />
 
             <TextInput
               label="Description"
               source="description"
               validate={required()}
             />
-            
+
+            <div className="flex gap-10">
+              <ColorComponent
+                label="Foreground"
+                source="foreground"
+                colorDemo="#ffffff"
+              />
+              <ColorComponent
+                label="Background"
+                source="background"
+                colorDemo="#000000"
+              />
+            </div>
           </SimpleForm>
         </Edit>
       )}
@@ -140,53 +112,29 @@ const UtilFormEdit = (props: UtilFormEdit) => {
         <Edit id={props.id} resource={props.model}>
           <SimpleForm
             onSubmit={handleSubmit}
-            toolbar={
-              <div
-                style={{
-                  padding: "10px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <SaveButton />
-                <DeleteButton onClick={handleDelete} redirect={false} />
-              </div>
-            }
+            toolbar={<ActionsFormComponent actionsType="edited" onCancel={props.closeDialog} onDelete={handleDelete} redirect={false} />}
           >
-            <FieldColorComponent
-              label="Value"
-              labelColor="Value color"
-              source="value"
-              color="value-color"
-            />
-
-            <FieldColorComponent
-              label="Display"
-              labelColor="Display color"
-              source="display"
-              color="display-color"
-            />
-
-            <FieldColorComponent
-              label="Foreground"
-              labelColor="Foreground color"
-              source="foreground"
-              color="foreground-color"
-            />
-
-            <FieldColorComponent
-              label="Background"
-              labelColor="Background color"
-              source="background"
-              color="background-color"
-            />
+            <TextInput label="Value" source="value" validate={required()} />
+            <TextInput label="Display" source="display" validate={required()} />
 
             <TextInput
               label="Description"
               source="description"
               validate={required()}
             />
+
+            <div className="flex gap-10">
+              <ColorComponent
+                label="Foreground"
+                source="foreground"
+                colorDemo="#ffffff"
+              />
+              <ColorComponent
+                label="Background"
+                source="background"
+                colorDemo="#000000"
+              />
+            </div>
           </SimpleForm>
         </Edit>
       )}
@@ -195,53 +143,29 @@ const UtilFormEdit = (props: UtilFormEdit) => {
         <Edit id={props.id} resource={props.model}>
           <SimpleForm
             onSubmit={handleSubmit}
-            toolbar={
-              <div
-                style={{
-                  padding: "10px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <SaveButton />
-                <DeleteButton onClick={handleDelete} redirect={false} />
-              </div>
-            }
+            toolbar={<ActionsFormComponent actionsType="edited" onCancel={props.closeDialog} onDelete={handleDelete} redirect={false} />}
           >
-            <FieldColorComponent
-              label="Value"
-              labelColor="Value color"
-              source="value"
-              color="value-color"
-            />
-
-            <FieldColorComponent
-              label="Display"
-              labelColor="Display color"
-              source="display"
-              color="display-color"
-            />
-
-            <FieldColorComponent
-              label="Foreground"
-              labelColor="Foreground color"
-              source="foreground"
-              color="foreground-color"
-            />
-
-            <FieldColorComponent
-              label="Background"
-              labelColor="Background color"
-              source="background"
-              color="background-color"
-            />
+            <TextInput label="Value" source="value" validate={required()} />
+            <TextInput label="Display" source="display" validate={required()} />
 
             <TextInput
               label="Description"
               source="description"
               validate={required()}
             />
+
+            <div className="flex gap-10">
+              <ColorComponent
+                label="Foreground"
+                source="foreground"
+                colorDemo="#ffffff"
+              />
+              <ColorComponent
+                label="Background"
+                source="background"
+                colorDemo="#000000"
+              />
+            </div>
           </SimpleForm>
         </Edit>
       )}
