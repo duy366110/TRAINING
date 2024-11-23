@@ -16,8 +16,9 @@ import DialogComponent from "@/components/dialog-component/DialogComponent";
 import UtilFormCreate from "./UtilFormCreate";
 import UtilFormEdit from "./UtilFormEdit";
 
-import DataStatus from "../datas/DataStatus";
+import DataPriority from "../datas/DataPrority";
 import DataDefault from "../datas/DataDefault";
+import DataStatus from "../datas/DataStatus";
 
 const ProductFilter = (props: any) => {
   const translate = useTranslate();
@@ -27,10 +28,11 @@ const ProductFilter = (props: any) => {
       <SearchInput
         source="value"
         alwaysOn
-        placeholder={translate("commons.filter.search")} />
+        placeholder={translate("commons.filter.search")}
+      />
     </Filter>
   );
-}
+};
 
 const UtilList = (props: any) => {
   const { identity }: any = useGetIdentity();
@@ -47,11 +49,13 @@ const UtilList = (props: any) => {
 
   const openDialogEdit = () => {
     if (selectedIds < 0) {
-      dispath(open({
-        title: translate("commons.button.edit"),
-        message: translate("commons.confirm.message"),
-        isSave: false
-      }));
+      dispath(
+        open({
+          title: translate("commons.button.edit"),
+          message: translate("commons.confirm.message"),
+          isSave: false,
+        }),
+      );
       return;
     }
     setDialogEdit(true);
@@ -62,7 +66,7 @@ const UtilList = (props: any) => {
   };
 
   const handleCheckboxChange = (id: number) => {
-    if(id === selectedIds) {
+    if (id === selectedIds) {
       setSelectedIds(-1);
       return;
     }
@@ -70,20 +74,22 @@ const UtilList = (props: any) => {
   };
 
   const handleDelete = () => {
-    if(identity.role === "admin" && identity.permissions?.includes('delete')) {
+    if (identity.role === "admin" && identity.permissions?.includes("delete")) {
       if (selectedIds < 0) {
-        dispath(open({
-          title: translate("commons.button.delete"),
-          message: translate("commons.confirm.message"),
-          isSave: false
-        }));
+        dispath(
+          open({
+            title: translate("commons.button.delete"),
+            message: translate("commons.confirm.message"),
+            isSave: false,
+          }),
+        );
         return;
       }
       dispath(
         open({
           title: translate("commons.button.delete"),
           message: translate("commons.confirm.message"),
-          isSave: true
+          isSave: true,
         }),
       );
     } else {
@@ -112,51 +118,69 @@ const UtilList = (props: any) => {
 
   useEffect(() => {
     dispath(clear());
-  }, [props.model])
+  }, [props.model]);
 
   return (
     <>
-        <ListComponent
-          resource={props.model}
-          isActions={true}
-          filters={<ProductFilter props={props} />}
-          actions={
-            <ActionsComponent
-              types={props.model}
-              onOpenCreate={() => setDialogCreate(true)}
-              onOpenEdit={openDialogEdit}
-              onDelete={handleDelete}
-            />
-          }
-        >
-          {props.model === "priorities" && (
-            <DataStatus
-              selectedIds={selectedIds}
-              handleCheckboxChange={handleCheckboxChange}
-            />
-          )}
+      <ListComponent
+        resource={props.model}
+        isActions={true}
+        filters={<ProductFilter props={props} />}
+        actions={
+          <ActionsComponent
+            types={props.model}
+            onOpenCreate={() => setDialogCreate(true)}
+            onOpenEdit={openDialogEdit}
+            onDelete={handleDelete}
+          />
+        }
+      >
+        {props.model === "priorities" && (
+          <DataPriority
+            selectedIds={selectedIds}
+            handleCheckboxChange={handleCheckboxChange}
+          />
+        )}
 
-          {props.model === "defaults" && (
-            <DataDefault
-              selectedIds={selectedIds}
-              handleCheckboxChange={handleCheckboxChange}
-            />
-          )}
-        </ListComponent>
+        {props.model === "defaults" && (
+          <DataDefault
+            selectedIds={selectedIds}
+            handleCheckboxChange={handleCheckboxChange}
+          />
+        )}
+
+        {props.model === "status" && (
+          <DataStatus
+            selectedIds={selectedIds}
+            handleCheckboxChange={handleCheckboxChange}
+          />
+        )}
+      </ListComponent>
 
       <DialogComponent
-        titleType={props.model === "defaults"? "resources.default.name" : "resources.priority.name"}
+        titleType={
+          props.model === "defaults"
+            ? "resources.default.name"
+            : "resources.priority.name"
+        }
         titleContent="commons.dialog.create"
         subTitle="commons.dialog.subTitleCreate"
         open={dialogCreate}
         onClose={() => setDialogCreate(false)}
       >
-        <UtilFormCreate model={props.model} closeDialog={() => setDialogCreate(false)} />
+        <UtilFormCreate
+          model={props.model}
+          closeDialog={() => setDialogCreate(false)}
+        />
       </DialogComponent>
 
       {selectedIds >= 0 && (
         <DialogComponent
-          titleType={props.model === "defaults"? "resources.default.name" : "resources.priority.name"}
+          titleType={
+            props.model === "defaults"
+              ? "resources.default.name"
+              : "resources.priority.name"
+          }
           titleContent="commons.dialog.edit"
           subTitle="commons.dialog.subTitleEdit"
           open={dialogEdit}

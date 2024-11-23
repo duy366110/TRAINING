@@ -60,6 +60,30 @@ const ActionsComponent = (props: ActionsComponentProps) => {
           </Button>
         </TopToolbar>
       )}
+
+      {props.types === "status" && (
+        <TopToolbar>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={props.onOpenCreate}
+          >
+            + {translate("commons.button.create")}
+          </Button>
+
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={props.onOpenEdit}
+          >
+            {translate("commons.button.edit")}
+          </Button>
+
+          <Button onClick={props.onDelete} variant="contained" color="error">
+            {translate("commons.button.delete")}
+          </Button>
+        </TopToolbar>
+      )}
     </>
   );
 };

@@ -154,6 +154,45 @@ const UtilFormEdit = (props: UtilFormEdit) => {
           </SimpleForm>
         </Edit>
       )}
+
+      {props.model === "status" && (
+        <Edit id={props.id} resource={props.model}>
+          <SimpleForm
+            onSubmit={handleSubmit}
+            toolbar={
+              <div
+                style={{
+                  padding: "10px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <SaveButton />
+                <DeleteButton onClick={handleDelete} redirect={false} />
+              </div>
+            }
+          >
+            <TextInput label="Value" source="value" validate={required()} />
+            <TextInput label="Display" source="display" validate={required()} />
+            <TextInput
+              label="Description"
+              source="description"
+              validate={required()}
+            />
+            <TextInput
+              label="Foreground"
+              source="foreground"
+              validate={required()}
+            />
+            <TextInput
+              label="Background"
+              source="background"
+              validate={required()}
+            />
+          </SimpleForm>
+        </Edit>
+      )}
     </>
   );
 };
