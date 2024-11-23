@@ -30,15 +30,23 @@ paths:
                       type: integer
                     value:
                       type: string
+                    value-color:
+                      type: string
                     default:
                       type: boolean
                     display:
+                      type: string
+                    display-color:
                       type: string
                     description:
                       type: string
                     foreground:
                       type: string
+                    foreground-color:
+                      type: string
                     background:
+                      type: string
+                    background-color:
                       type: string
                 example:
                   - id: 1
@@ -48,6 +56,16 @@ paths:
                     description: "Description 1"
                     foreground: "Red"
                     background: "Background 1"
+                  - id: 6
+                    background: "string"
+                    background-color: "#0062b1"
+                    description: "string"
+                    display: "string"
+                    display-color: "#b0bc00"
+                    foreground: "string"
+                    foreground-color: "#b0bc00"
+                    value: "string"
+                    value-color: "#d33115"
                   - id: 2
                     value: "Hightset"
                     display: "Hightset"

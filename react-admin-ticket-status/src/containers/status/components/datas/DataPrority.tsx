@@ -10,6 +10,8 @@ import { useState, useEffect } from "react";
 import FieldFunctionComponent from "@/components/fields-component/field-function-component/FieldFunctionComponent";
 import Checkbox from "@mui/material/Checkbox";
 import { Typography } from "@mui/material";
+import DoneIcon from '@mui/icons-material/Done';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 interface DataPriorityProps {
   selectedIds: number;
@@ -27,13 +29,19 @@ const DataPriority = (props: DataPriorityProps) => {
   const [isSort, setIsSort] = useState<boolean>(false);
 
   const renderCustomField = (record: any, filed: string) => {
-    if (["Lowest", "Red"].includes(record[filed])) {
-      return <Typography color={"red"}>{record?.value}</Typography>;
-    }
-    if (["Hightset", "Green"].includes(record[filed])) {
-      return <Typography color={"green"}>{record.value}</Typography>;
-    }
-    return null;
+      return (
+        <Typography
+          className={`
+          flex items-center
+          capitalize text-[15px] font-semibold
+        `}
+        >
+          {record[`${filed}-color`] && <FiberManualRecordIcon className={`text-[${record[`${filed}-color`]}] !w-[12px] mr-1`} />}
+          {record.value}
+        </Typography>
+      );
+    
+    // return null;
   };
 
   const handleSortChange = (sort: SortPayload) => {
@@ -111,6 +119,7 @@ const DataPriority = (props: DataPriorityProps) => {
       />
 
       <TextField
+        className="capitalize"
         source="description"
         label={translate("commons.list.field.description")}
       />
@@ -121,9 +130,10 @@ const DataPriority = (props: DataPriorityProps) => {
         render={renderCustomField}
       />
 
-      <TextField
-        source="background"
-        label={translate("commons.list.field.background")}
+      <FieldFunctionComponent
+        label={translate("commons.list.field.foreground")}
+        filed="background"
+        render={renderCustomField}
       />
     </Datagrid>
   );
