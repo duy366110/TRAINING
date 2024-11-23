@@ -16,9 +16,9 @@ paths:
           headers:
             Content-Range:
               description: Số lượng kết quả được trả về
-              schema:
-                type: string
-                example: items 0-5/10
+              # schema:
+              #   type: string
+              #   example: items 0-5/10
           content:
             application/json:
               schema:
@@ -50,14 +50,17 @@ paths:
                       type: string
                 example:
                   - id: 1
-                    value: "Lowest"
-                    display: "Hightset"
-                    default: false
-                    description: "Description 1"
-                    foreground: "Red"
-                    background: "Background 1"
+                    background: "Dev string"
+                    background-color: "#0062b1"
+                    description: "string"
+                    display: "string"
+                    display-color: "#b0bc00"
+                    foreground: "string"
+                    foreground-color: "#b0bc00"
+                    value: "string"
+                    value-color: "#d33115"
                   - id: 6
-                    background: "string"
+                    background: "Auto string"
                     background-color: "#0062b1"
                     description: "string"
                     display: "string"
@@ -67,33 +70,45 @@ paths:
                     value: "string"
                     value-color: "#d33115"
                   - id: 2
-                    value: "Hightset"
-                    display: "Hightset"
-                    default: true
-                    description: "Description 2"
-                    foreground: "Red"
-                    background: "Background 2"
+                    background: "Term string"
+                    background-color: "#0062b1"
+                    description: "string"
+                    display: "string"
+                    display-color: "#b0bc00"
+                    foreground: "string"
+                    foreground-color: "#b0bc00"
+                    value: "string"
+                    value-color: "#d33115"
                   - id: 3
-                    value: "Lowest"
-                    display: "Lowest"
-                    default: false
-                    description: "Description 3"
-                    foreground: "Green"
-                    background: "Background 3"
+                    background: "string"
+                    background-color: "#0062b1"
+                    description: "string"
+                    display: "string"
+                    display-color: "#b0bc00"
+                    foreground: "string"
+                    foreground-color: "#b0bc00"
+                    value: "string"
+                    value-color: "#d33115"
                   - id: 4
-                    value: "Lowest"
-                    display: "Hightset"
-                    default: false
-                    description: "Description 4"
-                    foreground: "Red"
-                    background: "Background 4"
+                    background: "string"
+                    background-color: "#0062b1"
+                    description: "string"
+                    display: "string"
+                    display-color: "#b0bc00"
+                    foreground: "string"
+                    foreground-color: "#b0bc00"
+                    value: "string"
+                    value-color: "#d33115"
                   - id: 5
-                    value: "Hightset"
-                    display: "Lowest"
-                    default: false
-                    description: "Description 5"
-                    foreground: "Green"
-                    background: "Background 5"
+                    background: "string"
+                    background-color: "#0062b1"
+                    description: "string"
+                    display: "string"
+                    display-color: "#b0bc00"
+                    foreground: "string"
+                    foreground-color: "#b0bc00"
+                    value: "string"
+                    value-color: "#d33115"
     post:
       summary: Thêm người dùng mới
       requestBody:
@@ -105,13 +120,23 @@ paths:
               properties:
                 value:
                   type: string
+                value-color:
+                  type: string
+                default:
+                  type: boolean
                 display:
+                  type: string
+                display-color:
                   type: string
                 description:
                   type: string
                 foreground:
                   type: string
+                foreground-color:
+                  type: string
                 background:
+                  type: string
+                background-color:
                   type: string
       responses:
         '201':
@@ -130,15 +155,24 @@ paths:
                   display:
                     type: string
                     example: "display 50"
+                  display-color:
+                    type: string
+                    example: "#b0bc00"
                   description:
                     type: string
                     example: "description 50"
                   foreground:
                     type: string
                     example: "foreground 50"
+                  foreground-color:
+                    type: string
+                    example: "#b0bc00"
                   background:
                     type: string
                     example: "background 50"
+                  background-color:
+                    type: string
+                    example: "#0062b1"
 
 
   /priorities/{id}:
@@ -192,13 +226,23 @@ paths:
                     type: integer
                   value:
                     type: string
+                  value-color:
+                    type: string
+                  default:
+                    type: boolean
                   display:
+                    type: string
+                  display-color:
                     type: string
                   description:
                     type: string
                   foreground:
                     type: string
+                  foreground-color:
+                    type: string
                   background:
+                    type: string
+                  background-color:
                     type: string
         '404':
           description: Người dùng không tồn tại
@@ -220,13 +264,23 @@ paths:
               properties:
                 value:
                   type: string
+                value-color:
+                  type: string
+                default:
+                  type: boolean
                 display:
+                  type: string
+                display-color:
                   type: string
                 description:
                   type: string
                 foreground:
                   type: string
+                foreground-color:
+                  type: string
                 background:
+                  type: string
+                background-color:
                   type: string
       responses:
         '200':
@@ -241,19 +295,28 @@ paths:
                     example: 1
                   value:
                     type: string
-                    example: "Title update 50"
+                    example: "Value update 50"
                   display:
                     type: string
                     example: "display update 50"
+                  display-color:
+                    type: string
+                    example: "#b0bc00"
                   description:
                     type: string
                     example: "description update 50"
                   foreground:
                     type: string
                     example: "foreground update 50"
+                  foreground-color:
+                    type: string
+                    example: "#b0bc00"
                   background:
                     type: string
                     example: "background update 50"
+                  background-color:
+                    type: string
+                    example: "#0062b1"
         '404':
           description: Người dùng không tồn tại
 
@@ -268,9 +331,9 @@ paths:
           headers:
             Content-Range:
               description: Số lượng kết quả được trả về
-              schema:
-                type: string
-                example: items 0-5/10
+              # schema:
+              #   type: string
+              #   example: items 0-5/10
           content:
             application/json:
               schema:
@@ -282,52 +345,91 @@ paths:
                       type: integer
                     value:
                       type: string
+                    value-color:
+                      type: string
                     default:
                       type: boolean
                     display:
+                      type: string
+                    display-color:
                       type: string
                     description:
                       type: string
                     foreground:
                       type: string
+                    foreground-color:
+                      type: string
                     background:
                       type: string
+                    background-color:
+                      type: string
                 example:
-                  - id: 1
-                    value: "Lowest"
-                    display: "Hightset"
-                    default: false
-                    description: "Description 1"
-                    foreground: "Red"
-                    background: "Background 1"
-                  - id: 2
-                    value: "Hightset"
-                    display: "Hightset"
-                    default: true
-                    description: "Description 2"
-                    foreground: "Red"
-                    background: "Background 2"
-                  - id: 3
-                    value: "Lowest"
-                    display: "Lowest"
-                    default: false
-                    description: "Description 3"
-                    foreground: "Green"
-                    background: "Background 3"
-                  - id: 4
-                    value: "Lowest"
-                    display: "Hightset"
-                    default: false
-                    description: "Description 4"
-                    foreground: "Red"
-                    background: "Background 4"
-                  - id: 5
-                    value: "Hightset"
-                    display: "Lowest"
-                    default: false
-                    description: "Description 5"
-                    foreground: "Green"
-                    background: "Background 5"
+                  - id: 7
+                    background: "Default Configuration"
+                    background-color: "#ced4da"
+                    description: "The default settings applied to all environments"
+                    display: "Default"
+                    display-color: "#adb5bd"
+                    foreground: "General"
+                    foreground-color: "#6c757d"
+                    value: "Enabled"
+                    value-color: "#28a745"
+
+                  - id: 8
+                    background: "Default User Interface"
+                    background-color: "#f8f9fa"
+                    description: "The standard interface layout for the application"
+                    display: "Default UI"
+                    display-color: "#007bff"
+                    foreground: "Template"
+                    foreground-color: "#6c757d"
+                    value: "Visible"
+                    value-color: "#20c997"
+
+                  - id: 9
+                    background: "Default Permissions"
+                    background-color: "#e9ecef"
+                    description: "The basic permissions set for new users"
+                    display: "Default Permissions"
+                    display-color: "#ffc107"
+                    foreground: "Access"
+                    foreground-color: "#17a2b8"
+                    value: "Restricted"
+                    value-color: "#dc3545"
+
+                  - id: 10
+                    background: "Default Roles"
+                    background-color: "#d6d8db"
+                    description: "Default roles assigned to new team members"
+                    display: "Default Role"
+                    display-color: "#6f42c1"
+                    foreground: "Member"
+                    foreground-color: "#6610f2"
+                    value: "Assigned"
+                    value-color: "#28a745"
+
+                  - id: 11
+                    background: "Default State"
+                    background-color: "#ced4da"
+                    description: "Default state applied when no user-defined state is present"
+                    display: "Default State"
+                    display-color: "#6c757d"
+                    foreground: "Idle"
+                    foreground-color: "#adb5bd"
+                    value: "Pending"
+                    value-color: "#ffc107"
+
+                  - id: 12
+                    background: "Default Profile Settings"
+                    background-color: "#dee2e6"
+                    description: "The initial settings for a user's profile"
+                    display: "Default Profile"
+                    display-color: "#007bff"
+                    foreground: "User"
+                    foreground-color: "#17a2b8"
+                    value: "Unconfigured"
+                    value-color: "#dc3545"
+
 
     post:
       summary: Thêm người dùng mới
@@ -340,13 +442,23 @@ paths:
               properties:
                 value:
                   type: string
+                value-color:
+                  type: string
+                default:
+                  type: boolean
                 display:
+                  type: string
+                display-color:
                   type: string
                 description:
                   type: string
                 foreground:
                   type: string
+                foreground-color:
+                  type: string
                 background:
+                  type: string
+                background-color:
                   type: string
       responses:
         '201':
@@ -361,19 +473,28 @@ paths:
                     example: 50
                   value:
                     type: string
-                    example: "Title 5"
+                    example: "Title 50"
                   display:
                     type: string
                     example: "display 50"
+                  display-color:
+                    type: string
+                    example: "#b0bc00"
                   description:
                     type: string
                     example: "description 50"
                   foreground:
                     type: string
                     example: "foreground 50"
+                  foreground-color:
+                    type: string
+                    example: "#b0bc00"
                   background:
                     type: string
                     example: "background 50"
+                  background-color:
+                    type: string
+                    example: "#0062b1"
 
   /defaults/{id}:
       delete:
@@ -426,13 +547,23 @@ paths:
                       type: integer
                     value:
                       type: string
+                    value-color:
+                      type: string
+                    default:
+                      type: boolean
                     display:
+                      type: string
+                    display-color:
                       type: string
                     description:
                       type: string
                     foreground:
                       type: string
+                    foreground-color:
+                      type: string
                     background:
+                      type: string
+                    background-color:
                       type: string
           '404':
             description: Người dùng không tồn tại
@@ -454,13 +585,23 @@ paths:
                 properties:
                   value:
                     type: string
+                  value-color:
+                    type: string
+                  default:
+                    type: boolean
                   display:
+                    type: string
+                  display-color:
                     type: string
                   description:
                     type: string
                   foreground:
                     type: string
+                  foreground-color:
+                    type: string
                   background:
+                    type: string
+                  background-color:
                     type: string
         responses:
           '200':
@@ -475,19 +616,28 @@ paths:
                       example: 1
                     value:
                       type: string
-                      example: "Title update 50"
+                      example: "Value update 50"
                     display:
                       type: string
                       example: "display update 50"
+                    display-color:
+                      type: string
+                      example: "#b0bc00"
                     description:
                       type: string
                       example: "description update 50"
                     foreground:
                       type: string
                       example: "foreground update 50"
+                    foreground-color:
+                      type: string
+                      example: "#b0bc00"
                     background:
                       type: string
                       example: "background update 50"
+                    background-color:
+                      type: string
+                      example: "#0062b1"
           '404':
             description: Người dùng không tồn tại
 
@@ -503,9 +653,9 @@ paths:
           headers:
             Content-Range:
               description: Số lượng kết quả được trả về
-              schema:
-                type: string
-                example: items 0-5/10
+              # schema:
+              #   type: string
+              #   example: items 0-5/10
           content:
             application/json:
               schema:
@@ -517,52 +667,92 @@ paths:
                       type: integer
                     value:
                       type: string
+                    value-color:
+                      type: string
                     default:
                       type: boolean
                     display:
+                      type: string
+                    display-color:
                       type: string
                     description:
                       type: string
                     foreground:
                       type: string
+                    foreground-color:
+                      type: string
                     background:
+                      type: string
+                    background-color:
                       type: string
                 example:
                   - id: 1
-                    value: "Lowest"
-                    display: "Hightset"
-                    default: false
-                    description: "Description 1"
-                    foreground: "Red"
-                    background: "Background 1"
+                    background: "Development Environment"
+                    background-color: "#0062b1"
+                    description: "Environment used for development purposes"
+                    display: "Development"
+                    display-color: "#b0bc00"
+                    foreground: "Debug"
+                    foreground-color: "#007acc"
+                    value: "Active"
+                    value-color: "#28a745"
+
                   - id: 2
-                    value: "Hightset"
-                    display: "Hightset"
-                    default: true
-                    description: "Description 2"
-                    foreground: "Red"
-                    background: "Background 2"
+                    background: "Testing Environment"
+                    background-color: "#e83e8c"
+                    description: "Environment used for testing and QA"
+                    display: "Testing"
+                    display-color: "#fd7e14"
+                    foreground: "QA"
+                    foreground-color: "#17a2b8"
+                    value: "In Progress"
+                    value-color: "#ffc107"
+
                   - id: 3
-                    value: "Lowest"
-                    display: "Lowest"
-                    default: false
-                    description: "Description 3"
-                    foreground: "Green"
-                    background: "Background 3"
+                    background: "Production Environment"
+                    background-color: "#28a745"
+                    description: "Environment used for live deployments"
+                    display: "Production"
+                    display-color: "#007bff"
+                    foreground: "Live"
+                    foreground-color: "#6c757d"
+                    value: "Stable"
+                    value-color: "#20c997"
+
                   - id: 4
-                    value: "Lowest"
-                    display: "Hightset"
-                    default: false
-                    description: "Description 4"
-                    foreground: "Red"
-                    background: "Background 4"
+                    background: "Staging Environment"
+                    background-color: "#6f42c1"
+                    description: "Pre-production environment for testing"
+                    display: "Staging"
+                    display-color: "#ffc107"
+                    foreground: "Pre-Live"
+                    foreground-color: "#17a2b8"
+                    value: "Review"
+                    value-color: "#e83e8c"
+
                   - id: 5
-                    value: "Hightset"
-                    display: "Lowest"
-                    default: false
-                    description: "Description 5"
-                    foreground: "Green"
-                    background: "Background 5"
+                    background: "Backup Environment"
+                    background-color: "#343a40"
+                    description: "Environment for backup and recovery testing"
+                    display: "Backup"
+                    display-color: "#6c757d"
+                    foreground: "Archive"
+                    foreground-color: "#adb5bd"
+                    value: "Offline"
+                    value-color: "#f8f9fa"
+
+                  - id: 6
+                    background: "Automation Environment"
+                    background-color: "#6610f2"
+                    description: "Environment used for automated processes"
+                    display: "Automation"
+                    display-color: "#20c997"
+                    foreground: "Bots"
+                    foreground-color: "#6f42c1"
+                    value: "Scheduled"
+                    value-color: "#dc3545"
+
+
     post:
       summary: Thêm người dùng mới
       requestBody:
@@ -574,13 +764,23 @@ paths:
               properties:
                 value:
                   type: string
+                value-color:
+                  type: string
+                default:
+                  type: boolean
                 display:
+                  type: string
+                display-color:
                   type: string
                 description:
                   type: string
                 foreground:
                   type: string
+                foreground-color:
+                  type: string
                 background:
+                  type: string
+                background-color:
                   type: string
       responses:
         '201':
@@ -599,29 +799,48 @@ paths:
                   display:
                     type: string
                     example: "display 50"
+                  display-color:
+                    type: string
+                    example: "#b0bc00"
                   description:
                     type: string
                     example: "description 50"
                   foreground:
                     type: string
                     example: "foreground 50"
+                  foreground-color:
+                    type: string
+                    example: "#b0bc00"
                   background:
                     type: string
                     example: "background 50"
+                  background-color:
+                    type: string
+                    example: "#0062b1"
 
   /status/{id}:
-    delete:
-      summary: Xóa người dùng theo ID
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: integer
-            description: ID của người dùng cần xóa
-      responses:
-        '200':
-          description: Người dùng đã được xóa thành công
+      delete:
+        summary: Xóa người dùng theo ID
+        parameters:
+          - in: path
+            name: id
+            required: true
+            schema:
+              type: integer
+              description: ID của người dùng cần xóa
+        responses:
+          '200':
+            description: Người dùng đã được xóa thành công
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: "User with ID 1 has been deleted successfully."
+        '404':
+          description: Người dùng không tồn tại
           content:
             application/json:
               schema:
@@ -629,98 +848,117 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: "User with ID 1 has been deleted successfully."
-      '404':
-        description: Người dùng không tồn tại
-        content:
-          application/json:
+                    example: "User not found."
+      get:
+        summary: Lấy thông tin người dùng theo ID
+        parameters:
+          - in: path
+            name: id
+            required: true
             schema:
-              type: object
-              properties:
-                message:
-                  type: string
-                  example: "User not found."
-    get:
-      summary: Lấy thông tin người dùng theo ID
-      parameters:
-        - in: path
-          name: id
+              type: integer
+        responses:
+          '200':
+            description: Thành công
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    value:
+                      type: string
+                    value-color:
+                      type: string
+                    default:
+                      type: boolean
+                    display:
+                      type: string
+                    display-color:
+                      type: string
+                    description:
+                      type: string
+                    foreground:
+                      type: string
+                    foreground-color:
+                      type: string
+                    background:
+                      type: string
+                    background-color:
+                      type: string
+          '404':
+            description: Người dùng không tồn tại
+      put:
+        summary: Cập nhật thông tin người dùng theo ID
+        parameters:
+          - in: path
+            name: id
+            required: true
+            schema:
+              type: integer
+              example: 1
+        requestBody:
           required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Thành công
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  id:
-                    type: integer
                   value:
                     type: string
+                  value-color:
+                    type: string
+                  default:
+                    type: boolean
                   display:
+                    type: string
+                  display-color:
                     type: string
                   description:
                     type: string
                   foreground:
                     type: string
+                  foreground-color:
+                    type: string
                   background:
                     type: string
-        '404':
-          description: Người dùng không tồn tại
-    put:
-      summary: Cập nhật thông tin người dùng theo ID
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: integer
-            example: 1
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                value:
-                  type: string
-                display:
-                  type: string
-                description:
-                  type: string
-                foreground:
-                  type: string
-                background:
-                  type: string
-      responses:
-        '200':
-          description: Người dùng đã được cập nhật thành công
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    example: 1
-                  value:
+                  background-color:
                     type: string
-                    example: "Title update 50"
-                  display:
-                    type: string
-                    example: "display update 50"
-                  description:
-                    type: string
-                    example: "description update 50"
-                  foreground:
-                    type: string
-                    example: "foreground update 50"
-                  background:
-                    type: string
-                    example: "background update 50"
-        '404':
-          description: Người dùng không tồn tại
+        responses:
+          '200':
+            description: Người dùng đã được cập nhật thành công
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    value:
+                      type: string
+                      example: "Value update 50"
+                    display:
+                      type: string
+                      example: "display update 50"
+                    display-color:
+                      type: string
+                      example: "#b0bc00"
+                    description:
+                      type: string
+                      example: "description update 50"
+                    foreground:
+                      type: string
+                      example: "foreground update 50"
+                    foreground-color:
+                      type: string
+                      example: "#b0bc00"
+                    background:
+                      type: string
+                      example: "background update 50"
+                    background-color:
+                      type: string
+                      example: "#0062b1"
+          '404':
+            description: Người dùng không tồn tại

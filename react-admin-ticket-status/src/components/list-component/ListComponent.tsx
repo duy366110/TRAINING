@@ -15,7 +15,7 @@ const ListComponent = (props: ListComponent) => {
   return (
     <List
       resource={props.resource}
-      perPage={10}
+      perPage={6}
       filters={props.filters}
       actions={props.isActions? props.actions : <div></div>}
     >

@@ -5,6 +5,8 @@ import {
   TextInput,
   required,
 } from "react-admin";
+import FieldColorComponent from "@/components/fields-component/field-color-component/FieldColorComponent";
+import ColorComponent from "@/components/color-component/ColorComponent";
 
 interface UtilFormCreateProps {
   model: string;
@@ -38,23 +40,42 @@ const UtilFormCreate = (props: UtilFormCreateProps) => {
       {props.model === "priorities" && (
         <Create>
           <SimpleForm onSubmit={handleSubmit}>
-            <TextInput label="Value" source="value" validate={required()} />
-            <TextInput label="Display" source="display" validate={required()} />
+            <FieldColorComponent
+              label="Value"
+              labelColor="Value color"
+              source="value"
+              color="value-color"
+            />
+
+            <FieldColorComponent
+              label="Display"
+              labelColor="Display color"
+              source="display"
+              color="display-color"
+            />
+
+            {/* <FieldColorComponent
+              label="Foreground"
+              labelColor="Foreground color"
+              source="foreground"
+              color="foreground-color"
+            /> */}
+
+            {/* <FieldColorComponent
+              label="Background"
+              labelColor="Background color"
+              source="background"
+              color="background-color"
+            /> */}
+
             <TextInput
               label="Description"
               source="description"
               validate={required()}
             />
-            <TextInput
-              label="Foreground"
-              source="foreground"
-              validate={required()}
-            />
-            <TextInput
-              label="Background"
-              source="background"
-              validate={required()}
-            />
+
+            <ColorComponent source="foreground" />
+            <ColorComponent source="background" />
           </SimpleForm>
         </Create>
       )}
@@ -62,21 +83,37 @@ const UtilFormCreate = (props: UtilFormCreateProps) => {
       {props.model === "defaults" && (
         <Create>
           <SimpleForm onSubmit={handleSubmit}>
-            <TextInput label="Value" source="value" validate={required()} />
-            <TextInput label="Display" source="display" validate={required()} />
+          <FieldColorComponent
+              label="Value"
+              labelColor="Value color"
+              source="value"
+              color="value-color"
+            />
+
+            <FieldColorComponent
+              label="Display"
+              labelColor="Display color"
+              source="display"
+              color="display-color"
+            />
+
+            <FieldColorComponent
+              label="Foreground"
+              labelColor="Foreground color"
+              source="foreground"
+              color="foreground-color"
+            />
+
+            <FieldColorComponent
+              label="Background"
+              labelColor="Background color"
+              source="background"
+              color="background-color"
+            />
+
             <TextInput
               label="Description"
               source="description"
-              validate={required()}
-            />
-            <TextInput
-              label="Foreground"
-              source="foreground"
-              validate={required()}
-            />
-            <TextInput
-              label="Background"
-              source="background"
               validate={required()}
             />
           </SimpleForm>
@@ -86,21 +123,37 @@ const UtilFormCreate = (props: UtilFormCreateProps) => {
       {props.model === "status" && (
         <Create>
           <SimpleForm onSubmit={handleSubmit}>
-            <TextInput label="Value" source="value" validate={required()} />
-            <TextInput label="Display" source="display" validate={required()} />
+          <FieldColorComponent
+              label="Value"
+              labelColor="Value color"
+              source="value"
+              color="value-color"
+            />
+
+            <FieldColorComponent
+              label="Display"
+              labelColor="Display color"
+              source="display"
+              color="display-color"
+            />
+
+            <FieldColorComponent
+              label="Foreground"
+              labelColor="Foreground color"
+              source="foreground"
+              color="foreground-color"
+            />
+
+            <FieldColorComponent
+              label="Background"
+              labelColor="Background color"
+              source="background"
+              color="background-color"
+            />
+
             <TextInput
               label="Description"
               source="description"
-              validate={required()}
-            />
-            <TextInput
-              label="Foreground"
-              source="foreground"
-              validate={required()}
-            />
-            <TextInput
-              label="Background"
-              source="background"
               validate={required()}
             />
           </SimpleForm>

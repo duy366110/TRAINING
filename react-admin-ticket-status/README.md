@@ -51,3 +51,7 @@ You can sign in to the application with the following usernames and password:
 - janedoe / password
 - johndoe / password
 
+
+- Chạy lệnh sau để cài đặt thư viện (nếu gặp lỗi, sử dụng cờ --legacy-peer-deps như đã hướng dẫn trước)
+    npm install react-admin-color-picker --legacy-peer-deps
+

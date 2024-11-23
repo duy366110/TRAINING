@@ -10,8 +10,7 @@ import { useState, useEffect } from "react";
 import FieldFunctionComponent from "@/components/fields-component/field-function-component/FieldFunctionComponent";
 import Checkbox from "@mui/material/Checkbox";
 import { Typography } from "@mui/material";
-import DoneIcon from '@mui/icons-material/Done';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 interface DataPriorityProps {
   selectedIds: number;
@@ -29,19 +28,21 @@ const DataPriority = (props: DataPriorityProps) => {
   const [isSort, setIsSort] = useState<boolean>(false);
 
   const renderCustomField = (record: any, filed: string) => {
-      return (
-        <Typography
-          className={`
+    return (
+      <Typography
+        className={`
           flex items-center
           capitalize text-[15px] font-semibold
         `}
-        >
-          {record[`${filed}-color`] && <FiberManualRecordIcon className={`text-[${record[`${filed}-color`]}] !w-[12px] mr-1`} />}
-          {record.value}
-        </Typography>
-      );
-    
-    // return null;
+      >
+        {record[`${filed}-color`] && (
+          <FiberManualRecordIcon
+            className={`text-[${record[`${filed}-color`]}] !w-[12px] mr-1`}
+          />
+        )}
+        {record[filed]}
+      </Typography>
+    );
   };
 
   const handleSortChange = (sort: SortPayload) => {
@@ -108,13 +109,15 @@ const DataPriority = (props: DataPriorityProps) => {
 
       <FieldFunctionComponent
         label={translate("commons.list.field.value")}
-        filed="value"
+        field="value"
+        source="value"
         render={renderCustomField}
       />
 
       <FieldFunctionComponent
         label={translate("commons.list.field.display")}
-        filed="display"
+        field="display"
+        source="display"
         render={renderCustomField}
       />
 
@@ -126,13 +129,15 @@ const DataPriority = (props: DataPriorityProps) => {
 
       <FieldFunctionComponent
         label={translate("commons.list.field.foreground")}
-        filed="foreground"
+        field="foreground"
+        source="foreground"
         render={renderCustomField}
       />
 
       <FieldFunctionComponent
         label={translate("commons.list.field.foreground")}
-        filed="background"
+        field="background"
+        source="background"
         render={renderCustomField}
       />
     </Datagrid>
