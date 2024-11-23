@@ -6,6 +6,7 @@ info:
 servers:
   - url: 'http://localhost:4010/api'  # URL của mock server, có thể thay đổi tùy theo môi trường của bạn
 paths:
+  #PRIORITIES
   /priorities:
     get:
       summary: Lấy danh sách status
@@ -239,7 +240,7 @@ paths:
           description: Người dùng không tồn tại
 
 
-
+  # DEFAULT
   /defaults:
     get:
       summary: Lấy danh sách status
@@ -471,3 +472,237 @@ paths:
                       example: "background update 50"
           '404':
             description: Người dùng không tồn tại
+
+
+
+  # STATUS
+  /status:
+    get:
+      summary: Lấy danh sách status
+      responses:
+        '200':
+          description: Thành công
+          headers:
+            Content-Range:
+              description: Số lượng kết quả được trả về
+              schema:
+                type: string
+                example: items 0-5/10
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    value:
+                      type: string
+                    default:
+                      type: boolean
+                    display:
+                      type: string
+                    description:
+                      type: string
+                    foreground:
+                      type: string
+                    background:
+                      type: string
+                example:
+                  - id: 1
+                    value: "Lowest"
+                    display: "Hightset"
+                    default: false
+                    description: "Description 1"
+                    foreground: "Red"
+                    background: "Background 1"
+                  - id: 2
+                    value: "Hightset"
+                    display: "Hightset"
+                    default: true
+                    description: "Description 2"
+                    foreground: "Red"
+                    background: "Background 2"
+                  - id: 3
+                    value: "Lowest"
+                    display: "Lowest"
+                    default: false
+                    description: "Description 3"
+                    foreground: "Green"
+                    background: "Background 3"
+                  - id: 4
+                    value: "Lowest"
+                    display: "Hightset"
+                    default: false
+                    description: "Description 4"
+                    foreground: "Red"
+                    background: "Background 4"
+                  - id: 5
+                    value: "Hightset"
+                    display: "Lowest"
+                    default: false
+                    description: "Description 5"
+                    foreground: "Green"
+                    background: "Background 5"
+    post:
+      summary: Thêm người dùng mới
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: string
+                display:
+                  type: string
+                description:
+                  type: string
+                foreground:
+                  type: string
+                background:
+                  type: string
+      responses:
+        '201':
+          description: Người dùng đã được tạo thành công
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 50
+                  value:
+                    type: string
+                    example: "Title 50"
+                  display:
+                    type: string
+                    example: "display 50"
+                  description:
+                    type: string
+                    example: "description 50"
+                  foreground:
+                    type: string
+                    example: "foreground 50"
+                  background:
+                    type: string
+                    example: "background 50"
+
+  /status/{id}:
+    delete:
+      summary: Xóa người dùng theo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            description: ID của người dùng cần xóa
+      responses:
+        '200':
+          description: Người dùng đã được xóa thành công
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "User with ID 1 has been deleted successfully."
+      '404':
+        description: Người dùng không tồn tại
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: "User not found."
+    get:
+      summary: Lấy thông tin người dùng theo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Thành công
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  value:
+                    type: string
+                  display:
+                    type: string
+                  description:
+                    type: string
+                  foreground:
+                    type: string
+                  background:
+                    type: string
+        '404':
+          description: Người dùng không tồn tại
+    put:
+      summary: Cập nhật thông tin người dùng theo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: string
+                display:
+                  type: string
+                description:
+                  type: string
+                foreground:
+                  type: string
+                background:
+                  type: string
+      responses:
+        '200':
+          description: Người dùng đã được cập nhật thành công
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  value:
+                    type: string
+                    example: "Title update 50"
+                  display:
+                    type: string
+                    example: "display update 50"
+                  description:
+                    type: string
+                    example: "description update 50"
+                  foreground:
+                    type: string
+                    example: "foreground update 50"
+                  background:
+                    type: string
+                    example: "background update 50"
+        '404':
+          description: Người dùng không tồn tại

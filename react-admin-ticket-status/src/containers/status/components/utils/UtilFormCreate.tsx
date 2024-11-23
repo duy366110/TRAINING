@@ -82,6 +82,30 @@ const UtilFormCreate = (props: UtilFormCreateProps) => {
           </SimpleForm>
         </Create>
       )}
+
+      {props.model === "status" && (
+        <Create>
+          <SimpleForm onSubmit={handleSubmit}>
+            <TextInput label="Value" source="value" validate={required()} />
+            <TextInput label="Display" source="display" validate={required()} />
+            <TextInput
+              label="Description"
+              source="description"
+              validate={required()}
+            />
+            <TextInput
+              label="Foreground"
+              source="foreground"
+              validate={required()}
+            />
+            <TextInput
+              label="Background"
+              source="background"
+              validate={required()}
+            />
+          </SimpleForm>
+        </Create>
+      )}
     </>
   );
 };

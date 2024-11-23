@@ -20,6 +20,7 @@ const TabComponent = (props: TabComponentProps) => {
         <Tabs value={props.value} onChange={props.change}>
           <Tab label={translate("commons.tabs.priority")} />
           <Tab label={translate("commons.tabs.default")} />
+          <Tab label={translate("resources.status.name")} />
         </Tabs>
         {props.children}
       </CardContent>

@@ -16,6 +16,7 @@ const StatusList = (props: any) => {
       <>
         {value === 0 && (<UtilList model="priorities" />)}
         {value === 1 && (<UtilList model="defaults" />)}
+        {value === 2 && (<UtilList model="status" />)}
       </>
     </TabComponent>
   );
