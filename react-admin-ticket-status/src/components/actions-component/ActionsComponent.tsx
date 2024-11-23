@@ -24,6 +24,7 @@ const ActionsComponent = (props: ActionsComponentProps) => {
           </Button>
 
           <Button
+          className="!mx-2"
             variant="contained"
             color="primary"
             onClick={props.onOpenEdit}

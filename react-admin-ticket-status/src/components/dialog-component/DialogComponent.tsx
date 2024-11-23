@@ -25,15 +25,15 @@ const DialogComponent = (props: DialogComponentProps) => {
     <Dialog open={props.open || false} onClose={props.onClose}>
       <DialogTitle>{translate(`${props.titleContent}`, {type: translate(`${props.titleType}`)})}</DialogTitle>
       <DialogContent>
-        <DialogContentText style={{width: "460px"}}>{translate(`${props.subTitle}`)}</DialogContentText>
+        <DialogContentText className="lg:w-[550px]">{translate(`${props.subTitle}`)}</DialogContentText>
         {props.children}
       </DialogContent>
 
-      <DialogActions>
+      {false && (<DialogActions>
         <Button onClick={props.onClose} color="secondary">
           Cancel
         </Button>
-      </DialogActions>
+      </DialogActions>)}
     </Dialog>
   );
 };

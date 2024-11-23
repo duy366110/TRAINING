@@ -5,6 +5,8 @@ import {
   TextInput,
   required,
 } from "react-admin";
+import ColorComponent from "@/components/color-component/ColorComponent";
+import ActionsFormComponent from "@/components/actions-form-component/ActionsFormComponent";
 
 interface UtilFormCreateProps {
   model: string;
@@ -37,72 +39,120 @@ const UtilFormCreate = (props: UtilFormCreateProps) => {
     <>
       {props.model === "priorities" && (
         <Create>
-          <SimpleForm onSubmit={handleSubmit}>
-            <TextInput label="Value" source="value" validate={required()} />
-            <TextInput label="Display" source="display" validate={required()} />
+          <SimpleForm
+            onSubmit={handleSubmit}
+            toolbar={<ActionsFormComponent onCancel={props.closeDialog} actionsType="created" />}
+          >
+            <TextInput
+              label="Value"
+              source="value"
+              validate={required()}
+            />
+
+            <TextInput
+              label="Display"
+              source="display"
+              validate={required()}
+            />
+
             <TextInput
               label="Description"
               source="description"
               validate={required()}
             />
-            <TextInput
-              label="Foreground"
-              source="foreground"
-              validate={required()}
-            />
-            <TextInput
-              label="Background"
-              source="background"
-              validate={required()}
-            />
+            
+            <div className="flex gap-10">
+              <ColorComponent
+                label="Foreground"
+                source="foreground"
+                colorDemo="#ffffff"
+              />
+              <ColorComponent
+                label="Background"
+                source="background"
+                colorDemo="#000000"
+              />
+            </div>
           </SimpleForm>
         </Create>
       )}
 
       {props.model === "defaults" && (
         <Create>
-          <SimpleForm onSubmit={handleSubmit}>
-            <TextInput label="Value" source="value" validate={required()} />
-            <TextInput label="Display" source="display" validate={required()} />
+          <SimpleForm
+            onSubmit={handleSubmit}
+            toolbar={<ActionsFormComponent onCancel={props.closeDialog} actionsType="created" />}
+          >
+            <TextInput
+              label="Value"
+              source="value"
+              validate={required()}
+            />
+
+            <TextInput
+              label="Display"
+              source="display"
+              validate={required()}
+            />
+
             <TextInput
               label="Description"
               source="description"
               validate={required()}
             />
-            <TextInput
-              label="Foreground"
-              source="foreground"
-              validate={required()}
-            />
-            <TextInput
-              label="Background"
-              source="background"
-              validate={required()}
-            />
+            
+            <div className="flex gap-10">
+              <ColorComponent
+                label="Foreground"
+                source="foreground"
+                colorDemo="#ffffff"
+              />
+              <ColorComponent
+                label="Background"
+                source="background"
+                colorDemo="#000000"
+              />
+            </div>
           </SimpleForm>
         </Create>
       )}
 
       {props.model === "status" && (
         <Create>
-          <SimpleForm onSubmit={handleSubmit}>
-            <TextInput label="Value" source="value" validate={required()} />
-            <TextInput label="Display" source="display" validate={required()} />
+          <SimpleForm
+            onSubmit={handleSubmit}
+            toolbar={<ActionsFormComponent onCancel={props.closeDialog} actionsType="created" />}
+          >
+            <TextInput
+              label="Value"
+              source="value"
+              validate={required()}
+            />
+
+            <TextInput
+              label="Display"
+              source="display"
+              validate={required()}
+            />
+
             <TextInput
               label="Description"
               source="description"
               validate={required()}
             />
-            <TextInput
-              label="Foreground"
-              source="foreground"
-              validate={required()}
-            />
-            <TextInput
-              label="Background"
-              source="background"
-              validate={required()}
-            />
+            
+            <div className="flex gap-10">
+              <ColorComponent
+                label="Foreground"
+                source="foreground"
+                colorDemo="#ffffff"
+              />
+              <ColorComponent
+                label="Background"
+                source="background"
+                colorDemo="#000000"
+              />
+            </div>
           </SimpleForm>
         </Create>
       )}

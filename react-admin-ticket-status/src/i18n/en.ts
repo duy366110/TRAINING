@@ -49,8 +49,9 @@ const customEnglishMessages: TranslationMessages = {
     commons: {
         button: {
             create: "Create",
+            cancel: "Cancel",
             edit: "Edit",
-            delete: "Delete"
+            delete: "Delete",
         },
         confirm: {
             message: "Please select a content before performing the action"

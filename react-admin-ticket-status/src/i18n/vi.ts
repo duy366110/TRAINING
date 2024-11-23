@@ -49,6 +49,7 @@ const customVietnameseMessages: TranslationMessages = {
     commons: {
         button: {
             create: "Tạo mới",
+            cancel: "Huỷ",
             edit: "Chỉnh sửa",
             delete: "Xóa"
         },

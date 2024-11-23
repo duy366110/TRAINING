@@ -5,10 +5,11 @@ import {
   FunctionField,
   useTranslate,
   useListContext,
-  SortPayload
+  SortPayload,
 } from "react-admin";
 import Checkbox from "@mui/material/Checkbox";
 import { Typography } from "@mui/material";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import FieldFunctionComponent from "@/components/fields-component/field-function-component/FieldFunctionComponent";
 
 interface DataDefaultProps {
@@ -27,13 +28,21 @@ const DataDefault = (props: DataDefaultProps) => {
   const [isSort, setIsSort] = useState<boolean>(false);
 
   const renderCustomField = (record: any, filed: string) => {
-    if (["Lowest", "Red"].includes(record[filed])) {
-      return <Typography color={"red"}>{record?.value}</Typography>;
-    }
-    if (["Hightset", "Green"].includes(record[filed])) {
-      return <Typography color={"green"}>{record.value}</Typography>;
-    }
-    return null;
+    return (
+      <Typography
+        className={`
+        flex items-center
+        capitalize text-[15px] font-semibold
+      `}
+      >
+        {record[`${filed}-color`] && (
+          <FiberManualRecordIcon
+            className={`text-[${record[`${filed}-color`]}] !w-[12px] mr-1`}
+          />
+        )}
+        {record[filed]}
+      </Typography>
+    );
   };
 
   const handleSortChange = (sort: SortPayload) => {
@@ -100,30 +109,36 @@ const DataDefault = (props: DataDefaultProps) => {
 
       <FieldFunctionComponent
         label={translate("commons.list.field.value")}
-        filed="value"
+        field="value"
+        source="value"
         render={renderCustomField}
       />
 
       <FieldFunctionComponent
         label={translate("commons.list.field.display")}
-        filed="display"
+        field="display"
+        source="display"
         render={renderCustomField}
       />
 
       <TextField
+        className="capitalize"
         source="description"
         label={translate("commons.list.field.description")}
       />
 
       <FieldFunctionComponent
         label={translate("commons.list.field.foreground")}
-        filed="foreground"
+        field="foreground"
+        source="foreground"
         render={renderCustomField}
       />
 
-      <TextField
+      <FieldFunctionComponent
+        label={translate("commons.list.field.foreground")}
+        field="background"
         source="background"
-        label={translate("commons.list.field.background")}
+        render={renderCustomField}
       />
     </Datagrid>
   );
