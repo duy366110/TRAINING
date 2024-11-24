@@ -88,7 +88,7 @@ const DataDefault = (props: DataDefaultProps) => {
       sort={sort}
     >
       <FunctionField
-        label="NO"
+        label=""
         render={(record: any) => (
           <Checkbox
             checked={props.selectedIds === record?.id}

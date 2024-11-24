@@ -1,4 +1,5 @@
-import { Admin, Resource, useStore } from "react-admin";
+import { Admin, Resource, CustomRoutes, useStore } from "react-admin";
+import { Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import CustomLayout from "@/layouts/LayoutCustom";
 import { themes, ThemeName } from "@/themes/themes";
@@ -7,6 +8,7 @@ import { authProvider } from "@/providers/authProvider";
 import { i18nProvider } from "@/providers/i18nProvider";
 import store from "@/stores/index";
 import status from "@/containers/status/index";
+import PageDefault from "@/containers/status/components/PageDefault";
 import Footer from "./containers/Footer";
 
 const App = () => {
@@ -24,6 +26,9 @@ const App = () => {
       darkTheme={darkTheme}
     >
       <Resource name="status" {...status} />
+      <CustomRoutes>
+        <Route path="/status/default" element={<PageDefault />} />
+      </CustomRoutes>
     </Admin>
   );
 };

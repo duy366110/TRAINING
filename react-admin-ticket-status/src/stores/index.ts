@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import sliceConfirm from './slices/sliceConfirm';
+import sliceTabs from "./slices/sliceTabs";
 
 const store = configureStore({
   reducer: {
-    confirm: sliceConfirm
+    confirm: sliceConfirm,
+    tab: sliceTabs
   }
 });
 

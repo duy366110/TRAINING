@@ -1,5 +1,9 @@
-import { TopToolbar, useTranslate } from "react-admin";
+import { TopToolbar, useTranslate, useRedirect } from "react-admin";
 import { Button } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 interface ActionsComponentProps {
   types?: string;
@@ -10,79 +14,122 @@ interface ActionsComponentProps {
 
 const ActionsComponent = (props: ActionsComponentProps) => {
   const translate = useTranslate();
+  const redirect: any = useRedirect();
+
+  const defaultHandler = () => {
+    redirect("/status/default");
+  }
 
   return (
     <>
       {props.types === "priorities" && (
         <TopToolbar>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={props.onOpenCreate}
-          >
-            + {translate("commons.button.create")}
-          </Button>
+          <div className="flex gap-2">
+            <Button onClick={defaultHandler}>
+            <MoreHorizIcon />
+            </Button>
+            <Button
+              className="flex gap-2 items-center text-[14px]"
+              onClick={props.onDelete}
+              variant="contained"
+              color="error"
+            >
+              <DeleteIcon fontSize="small" />
+              {translate("commons.button.delete")}
+            </Button>
 
-          <Button
-          className="!mx-2"
-            variant="contained"
-            color="primary"
-            onClick={props.onOpenEdit}
-          >
-            {translate("commons.button.edit")}
-          </Button>
+            <Button
+              className="flex gap-2 items-center text-[14px]"
+              variant="contained"
+              color="primary"
+              onClick={props.onOpenEdit}
+            >
+              <BorderColorIcon className="!w-[18px]" />
+              {translate("commons.button.edit")}
+            </Button>
 
-          <Button onClick={props.onDelete} variant="contained" color="error">
-            {translate("commons.button.delete")}
-          </Button>
+            <Button
+              className="flex gap-2 items-center text-[14px]"
+              variant="contained"
+              color="primary"
+              onClick={props.onOpenCreate}
+            >
+              <AddBoxIcon className="!w-[18px]" />
+              {translate("commons.button.create")}
+            </Button>
+          </div>
         </TopToolbar>
       )}
 
       {props.types === "defaults" && (
         <TopToolbar>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={props.onOpenCreate}
-          >
-            + {translate("commons.button.create")}
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              className="flex gap-2 items-center text-[14px]"
+              onClick={props.onDelete}
+              variant="contained"
+              color="error"
+            >
+              <DeleteIcon className="!w-[18px]" />
+              {translate("commons.button.delete")}
+            </Button>
 
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={props.onOpenEdit}
-          >
-            {translate("commons.button.edit")}
-          </Button>
+            <Button
+              className="flex gap-2 items-center text-[14px]"
+              variant="contained"
+              color="primary"
+              onClick={props.onOpenEdit}
+            >
+              <BorderColorIcon className="!w-[18px]" />
+              {translate("commons.button.edit")}
+            </Button>
 
-          <Button onClick={props.onDelete} variant="contained" color="error">
-            {translate("commons.button.delete")}
-          </Button>
+            <Button
+              className="flex gap-2 items-center text-[14px]"
+              variant="contained"
+              color="primary"
+              onClick={props.onOpenCreate}
+            >
+              <AddBoxIcon className="!w-[18px]" />
+              {translate("commons.button.create")}
+            </Button>
+          </div>
         </TopToolbar>
       )}
 
       {props.types === "status" && (
         <TopToolbar>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={props.onOpenCreate}
-          >
-            + {translate("commons.button.create")}
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              className="flex gap-2 items-center text-[14px]"
+              onClick={props.onDelete}
+              variant="contained"
+              color="error"
+            >
+              <DeleteIcon className="!w-[18px]" />
+              {translate("commons.button.delete")}
+            </Button>
 
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={props.onOpenEdit}
-          >
-            {translate("commons.button.edit")}
-          </Button>
+            <Button
+              className="flex gap-2 items-center text-[14px]"
+              variant="contained"
+              color="primary"
+              onClick={props.onOpenEdit}
+            >
+              <BorderColorIcon className="!w-[18px]" />
+              {translate("commons.button.edit")}
+            </Button>
 
-          <Button onClick={props.onDelete} variant="contained" color="error">
-            {translate("commons.button.delete")}
-          </Button>
+            <Button
+              className="flex gap-2 items-center text-[14px]"
+              variant="contained"
+              color="primary"
+              onClick={props.onOpenCreate}
+            >
+              <AddBoxIcon className="!w-[18px]" />
+              {translate("commons.button.create")}
+            </Button>
+          </div>
         </TopToolbar>
       )}
     </>

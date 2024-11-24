@@ -68,14 +68,22 @@ const DataPriority = (props: DataPriorityProps) => {
   }, [isSort]);
 
   useEffect(() => {
-    if (Array.isArray(localData)) {
-      const filterData = localData.filter((item: any) => {
-        return item.value
-          .toLowerCase()
-          .includes(filterValues?.value?.toLowerCase() || "");
-      });
-      setLocalData(filterData.length ? filterData : data);
+    let datasFilter = [];
+
+    if(!Array.isArray(localData) && data) {
+      datasFilter = data;
+
+    } else {
+      datasFilter = localData;
     }
+
+    const filterData = datasFilter.filter((item: any) => {
+      return item.value
+        .toLowerCase()
+        .includes(filterValues?.value?.toLowerCase() || "");
+    });
+    setLocalData(filterData.length ? filterData : data);
+
   }, [filterValues]);
 
   return (
@@ -89,7 +97,7 @@ const DataPriority = (props: DataPriorityProps) => {
       sort={sort}
     >
       <FunctionField
-        label="NO"
+        label=""
         render={(record: any) => (
           <Checkbox
             checked={props.selectedIds === record?.id}
