@@ -17,7 +17,7 @@ const ActionsFormComponent = (props: ActionsFormComponentProps) => {
     <>
       {props.actionsType === "created" && (
         <div
-          className={`p-[15px] mt-[45px]  flex justify-between w-full bg-[#f5f5f5]`}
+          className={`p-[15px] mt-[25px]  flex justify-between w-full bg-[#f5f5f5]`}
         >
           <Button onClick={props.onCancel} variant="contained" color="error">
             {translate("commons.button.cancel")}
@@ -29,7 +29,7 @@ const ActionsFormComponent = (props: ActionsFormComponentProps) => {
 
       {props.actionsType === "edited" && (
         <div
-          className={`p-[15px] mt-[45px]  flex justify-between w-full bg-[#f5f5f5]`}
+          className={`p-[15px] mt-[25px]  flex justify-between w-full bg-[#f5f5f5]`}
         >
           <Button onClick={props.onCancel} variant="contained" color="error">
             {translate("commons.button.cancel")}

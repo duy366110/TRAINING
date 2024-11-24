@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  TextField,
   Datagrid,
   FunctionField,
   useTranslate,
@@ -9,7 +8,6 @@ import {
 } from "react-admin";
 import Checkbox from "@mui/material/Checkbox";
 import { Typography } from "@mui/material";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import FieldFunctionComponent from "@/components/fields-component/field-function-component/FieldFunctionComponent";
 
 interface DataDefaultProps {
@@ -27,19 +25,15 @@ const DataDefault = (props: DataDefaultProps) => {
   });
   const [isSort, setIsSort] = useState<boolean>(false);
 
-  const renderCustomField = (record: any, filed: string) => {
+  const renderCustomField = (record: any, filed: string, width?: string) => {
     return (
       <Typography
         className={`
-        flex items-center
-        capitalize text-[15px] font-semibold
-      `}
+          Typography-cell flex items-center w-[${width}]
+          capitalize !text-[0.85rem] font-semibold h-[45px] border border-transparent 
+          ${filed === "display" ? `hover:border hover:border-[${record["background"]}] bg-[#e7edf933] pl-2 text-[${record["foreground"]}]` : ""}
+        `}
       >
-        {record[`${filed}-color`] && (
-          <FiberManualRecordIcon
-            className={`text-[${record[`${filed}-color`]}] !w-[12px] mr-1`}
-          />
-        )}
         {record[filed]}
       </Typography>
     );
@@ -111,6 +105,7 @@ const DataDefault = (props: DataDefaultProps) => {
         label={translate("commons.list.field.value")}
         field="value"
         source="value"
+        width="140px"
         render={renderCustomField}
       />
 
@@ -118,26 +113,15 @@ const DataDefault = (props: DataDefaultProps) => {
         label={translate("commons.list.field.display")}
         field="display"
         source="display"
+        width="140px"
         render={renderCustomField}
       />
 
-      <TextField
-        className="capitalize"
-        source="description"
+      <FieldFunctionComponent
         label={translate("commons.list.field.description")}
-      />
-
-      <FieldFunctionComponent
-        label={translate("commons.list.field.foreground")}
-        field="foreground"
-        source="foreground"
-        render={renderCustomField}
-      />
-
-      <FieldFunctionComponent
-        label={translate("commons.list.field.foreground")}
-        field="background"
-        source="background"
+        field="description"
+        source="description"
+        width="auto"
         render={renderCustomField}
       />
     </Datagrid>
