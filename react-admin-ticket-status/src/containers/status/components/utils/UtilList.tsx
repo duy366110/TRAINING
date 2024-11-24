@@ -34,7 +34,13 @@ const ProductFilter = (props: any) => {
   );
 };
 
-const UtilList = (props: any) => {
+interface UtilListProps {
+  showActions?: boolean;
+  showToolbar?: boolean;
+  model: string;
+}
+
+const UtilList = (props: UtilListProps) => {
   const { identity }: any = useGetIdentity();
   const translate = useTranslate();
   const [deleteOne] = useDelete();
@@ -127,12 +133,13 @@ const UtilList = (props: any) => {
         isActions={true}
         filters={<ProductFilter props={props} />}
         actions={
+          props.showActions?
           <ActionsComponent
             types={props.model}
             onOpenCreate={() => setDialogCreate(true)}
             onOpenEdit={openDialogEdit}
             onDelete={handleDelete}
-          />
+          /> : <></>
         }
       >
         {props.model === "priorities" && (

@@ -41,7 +41,7 @@ const ColorComponent = (props: ColorComponentProps) => {
                     className={`absolute border border-slate-200 rounded w-[25px] h-[25px] bg-[${colorDemo}] top-[50%] translate-y-[-50%] left-[5px]`}
                 ></div>
                 <input
-                    className='!pl-8 py-[9px] pr-5 w-[220px]'
+                    className='!pl-8 py-[9px] pr-5 w-full'
                     type="text"
                     value={color}
                     onClick={() => setDisplayPicker(!displayPicker)}
