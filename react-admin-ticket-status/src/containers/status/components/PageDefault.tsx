@@ -1,28 +1,33 @@
+import React, { useMemo } from "react";
+import { useTranslate } from "react-admin";
 import { Card, CardContent } from "@mui/material";
 import UtilList from "./utils/UtilList";
 import CustomizedBreadcrumbs from "@/components/breadcrumbs-component/BreadcrumbsComponent";
 
-const breadcrumbs = [
-    {
+const PageDefault = (props: any) => {
+  const translate = useTranslate();
+  const breadcrumbs = useMemo(() => {
+    return [
+      {
         icon: "",
-        label: "home",
+        label: translate("pos.home"),
         link: "/",
         first: true,
-    },
-    {
+      },
+      {
         icon: "",
-        label: "status",
-        link: "/status"
-    },
-    {
+        label: translate("resources.status.name"),
+        link: "/status",
+      },
+      {
         icon: "",
-        label: "default",
+        label: translate("resources.default.name"),
         link: "",
-        last: true
-    }
-]
+        last: true,
+      },
+    ];
+  }, []);
 
-const PageDefault = (props: any) => {
   return (
     <Card className="mt-[25px]">
       <CardContent>
@@ -35,4 +40,4 @@ const PageDefault = (props: any) => {
   );
 };
 
-export default PageDefault;
+export default React.memo(PageDefault);

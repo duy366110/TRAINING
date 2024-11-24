@@ -4,6 +4,7 @@ import vietnameseMessages from 'ra-language-vietnamese';
 const customVietnameseMessages: TranslationMessages = {
     ...vietnameseMessages,
     pos: {
+        home: "Trang chủ",
         search: 'Tìm kiếm',
         configuration: 'Cấu hình',
         language: 'Ngôn ngữ',
