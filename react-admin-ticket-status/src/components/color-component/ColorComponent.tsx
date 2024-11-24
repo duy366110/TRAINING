@@ -58,7 +58,7 @@ const ColorComponent = (props: ColorComponentProps) => {
                         tabIndex={-1}
                     >
                         <TwitterPicker
-                            className='!w-[240px]'
+                            className='!w-[280px]'
                             color={color}
                             onChangeComplete={handleColorChange}
                         />
