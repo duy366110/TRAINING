@@ -1,4 +1,4 @@
-# react-admin-layout
+# react-admin-menu
 
 ## Installation
 

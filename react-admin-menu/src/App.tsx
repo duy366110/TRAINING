@@ -5,13 +5,14 @@ import {
   EditGuesser,
   ShowGuesser,
 } from "react-admin";
-import { Layout } from "./Layout";
+import { Layout } from "./layout/Layout";
+import LayoutCustom from "./layout/LayoutCustom";
 import { dataProvider } from "./dataProvider";
 import { authProvider } from "./authProvider";
 
 export const App = () => (
   <Admin
-    layout={Layout}
+    layout={LayoutCustom}
     dataProvider={dataProvider}
     authProvider={authProvider}
   >
